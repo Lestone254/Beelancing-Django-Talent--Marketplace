@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+{%load static%}
+{%load humanize%}
+{%load customtags%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beelancing | Welcome</title>
+
+    <!-- Bootstrap link -->
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/mdb.min.css' %}">
+
+    <!-- FONT AWESOME CSS LINK -->
+    <link rel="stylesheet" href="{% static 'assets/css/all.css' %}">
+
+    <!-- STYLE CSS LINK -->
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+</head>
+<body>
+    <div class="w-100 position-relative">
+        <!-- navbar begins here -->
+        <header class="header ms-0 position-relative" id="header">
+    {%if request.user.username|nav%}
+    {% include 'writer/navbar.html' %}
+    {%else%}
+    {%include 'client/navbar.html'%}
+    {%endif%}
+        </header>
+        <!-- navbar ends here -->
+    </div>
+
+   <main class="main px-3">
+    <!-- header container -->
+<div class="container-fluid px-2 mt-5 pt-4">
+    <div class="d-flex justify-content-between align-items-center">
+        <!-- Job Title -->
+        <span class="h2 d-block px-2 text-start">{{job.Title}}</span>
+                <div class="dropdown">
+                  <button class="btn btn-sm border border-dark d-flex align-content-center p-2 batona" type="button" id="dropdownMenu2" data-mdb-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-ellipsis"></i>
+                  </button>
+                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    <li class="mb-2"><a href="#" class="dropdown-item"><i class="fas fa-arrow-up-right-from-square me-2"></i> View Proposals</a></li>
+                    <li class="mb-2"><a href="" class="dropdown-item"><i class="far fa-comments me-2"></i> Interviews</a></li>
+                    <li class="mb-2"><a href="" class="dropdown-item"><i class="fas fa-pen me-2"></i> Edit</a></li>
+                    <li class="mb-2"><a href="./messagepage.html" class="dropdown-item"><i class="far fa-trash-can text-danger me-2"></i> Delete Post</a></li>
+                  </ul>
+                </div>
+    </div>
+
+  <!-- Description -->
+  <p class="my-4 p-2 jobPostDesc">
+    {{job.Description}}
+  </p>
+
+  <div class="container border border-dark">
+    <!-- Skills -->
+  <span class="h4 text-start d-block mt-3 mb-4">
+    Required Skills:
+  </span>
+  <div class="row my-3">
+    <!-- skill -->
+    {%for x in job.Skills|skills%}
+    <div class="col-lg-2 col-3 pe-1 mb-3">
+        <span class="rounded bg-success text-white py-2 px-4">
+            {{x}}
+        </span>
+    </div>
+    {%endfor%}
+  </div>
+  </div>
+
+  <!-- other extras -->
+  <div class="row py-4">
+    <!-- item -->
+    <div class="col-lg-3 col-6 px-2 mb-2">
+        <div class="border border-dark rounded mx-2 p-2 d-flex flex-column">
+            <span class="d-block h6 text-start mb-4">
+                <i class="fas fa-dollar-sign me-1"></i>
+                Budget ({{job.Rate}})
+            </span>
+
+            <span class="d-block h5 fw-bold text-start">
+                ${{job.Amount}}.00
+            </span>
+        </div>
+    </div>
+
+    <!-- item -->
+    <div class="col-lg-3 col-6 px-2 mb-2">
+        <div class="border border-dark rounded mx-2 p-2 d-flex flex-column">
+            <span class="d-block h6 text-start mb-4">
+                <i class="fas fa-layer-group me-1"></i>
+                Scope
+            </span>
+
+            <span class="d-block h5 fw-bold text-start">
+                {{job.Type}}
+            </span>
+        </div>
+    </div>
+
+    <!-- item -->
+    <div class="col-lg-3 col-6 px-2 mb-2">
+        <div class="border border-dark rounded mx-2 p-2 d-flex flex-column">
+            <span class="d-block h6 text-start mb-4">
+                <i class="fas fa-brain me-1"></i>
+                Level
+            </span>
+
+            <span class="d-block h5 fw-bold text-start">
+                {{job.Level}}
+            </span>
+        </div>
+    </div>
+
+    <!-- item -->
+    <div class="col-lg-3 col-6 px-2 mb-2">
+        <div class="border border-dark rounded mx-2 p-2 d-flex flex-column">
+            <span class="d-block h6 text-start">
+                <i class="fa-solid fa-arrow-trend-up me-1"></i>
+                Activities
+            </span>
+
+            <div class="row">
+                <div class="col-lg-6 col-12">
+                    <span class="d-flex flex-column h5 fw-bold text-start">
+                        <span>Applicants</span>
+                        <span>32</span>
+                     </span>
+                </div>
+                <div class="col-lg-6 col-12">
+                    <span class="d-flex flex-column h5 fw-bold text-start">
+                        <span>Interviews</span>
+                        <span>2</span>
+                     </span>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <!-- edit and delete -->
+
+</div>
+<!-- header container -->
+   </main>
+
+    
+
+    <!-- JQUERY JS LINK -->
+    <script src="{% static 'assets/js/jquery.js' %}"></script>
+
+    <!-- BOOTSTRAP JS LINK -->
+    <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/js/mdb.min.js' %}"></script>
+
+    <!-- FONTAWESOME JS LINK -->
+    <script src="{% static 'assets/js/all.js' %}"></script>
+
+    <!-- isotope filter js link -->
+    <script src="{% static 'assets/js/isotope.js' %}"></script>
+
+    <!-- main js link -->
+    <script src="{% static 'assets/js/main.js' %}"></script>
+</body>
+
+</html>

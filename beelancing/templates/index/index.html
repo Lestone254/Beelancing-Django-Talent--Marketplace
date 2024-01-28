@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beelancing | Welcome</title>
+
+    <!-- Bootstrap link -->
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/mdb.min.css' %}">
+
+    <!-- FONT AWESOME CSS LINK -->
+    <link rel="stylesheet" href="{% static 'assets/css/all.css' %}">
+
+    <!-- STYLE CSS LINK -->
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <!-- navbar begins here -->
+        <header class="header position-relative" id="header">
+            {%include 'index/navbar.html'%}
+        </header>
+    <!-- navbar ends here -->
+    </div>
+
+    <!-- banner begins here -->
+    <div class="home-banner d-flex align-items-center mb-3 mb-lg-5">
+        <div class="container d-flex flex-column">
+            <span class="h3 d-block">
+                Hire expert freelancers
+                <span class="h3 strong">for any job, online</span>
+            </span>
+            <p>
+                Find the perfect talent for your business. The future of freelance is here.
+            </p>
+
+            <form action="{%url 'searchpage'%}" method="post" class="position-relative">
+                {%csrf_token%}
+                <label for="homeSearch"></label>
+                <input type="text" id="homeSearch" name="search" class="homeSearch" placeholder="Search" required>
+                <button type="submit" class="btn homeSearchBtn btn-success rounded-0 shadow-none" title="search"><i class="fas fa-search"></i></button>
+            </form>
+        </div>
+    </div>
+    <!-- banner ends here -->
+
+    <!-- category section begins here -->
+    <div class="homeCategory container mb-5">
+        <span class="d-block h4 text-center fw-bold">Explore Categories</span>
+        <p class="text-center mb-3">Search jobs by categories</p>
+
+        <div class="row">
+            <div class="category col-lg-3 col-6 mb-3">
+                <a href="#" class="category-link devIT d-flex flex-column justify-content-center align-items-center shadow px-2">
+                </a>
+                <a href="#" class="d-block text-start py-2">Development & IT</a>
+            </div>
+            <div class="category col-lg-3 col-6 mb-3">
+                <a href="#" class="category-link desCreative d-flex flex-column justify-content-center align-items-center shadow">
+                </a>
+                <a href="#" class="d-block text-start py-2">Design & Creative</a>
+            </div>
+            <div class="category col-lg-3 col-6 mb-3">
+                <a href="#" class="category-link salesMarketing d-flex flex-column justify-content-center align-items-center shadow px-2">
+                </a>
+                <a href="#" class="d-block text-start py-2">Sales & Marketing</a>
+            </div>
+            <div class="category col-lg-3 col-6 mb-3">
+                <a href="#" class="category-link writingTranslation d-flex flex-column justify-content-center align-items-center shadow px-2">
+                </a>
+                <a href="#" class="d-block text-start py-2">Writing & Translation</a>
+            </div>
+            <div class="category col-lg-3 col-6 mb-3">
+                <a href="#" class="category-link adminSupport d-flex flex-column justify-content-center align-items-center shadow px-2">
+                </a>
+                <a href="#" class="d-block text-start py-2">Admin & Customer Support</a>
+            </div>
+            <div class="category col-lg-3 col-6 mb-3">
+                <a href="#" class="category-link financeAcc d-flex flex-column justify-content-center align-items-center shadow px-2">
+                </a>
+                <a href="#" class="d-block text-start py-2">Finance & Account</a>
+            </div>
+            <div class="category col-lg-3 col-6 mb-3">
+                <a href="#" class="category-link engArchitecture d-flex flex-column justify-content-center align-items-center shadow px-2">
+                </a>
+                <a href="#" class="d-block text-start py-2">Engineering & Architecture</a>
+            </div>
+            <div class="category col-lg-3 col-6 mb-3">
+                <a href="#" class="category-link legal d-flex flex-column justify-content-center align-items-center shadow px-2">
+                </a>
+                <a href="#" class="d-block text-start py-2">Legal</a>
+            </div>
+        </div>
+    </div>
+    <!-- category section ends here -->
+
+    <!-- join now section begins here -->
+    <div class="homeJoin container my-4">
+        <div class="row">
+            <!-- as company -->
+            <div class="col-lg-6 col-12 mb-3 px-4 colo">
+                <div class="row">
+                    <!-- img -->
+                    <div class="col-lg-3 col-4 sideImg"></div>
+                    <div class="col-lg-9 col-8 bg-light px-2 py-4">
+                        <span class="d-block h4 text-center mb-3">Start As Company</span>
+                        <p class="text-center">
+                            Start as company and connect with the rich talent in Beelancing to help on achieving your goals.
+                        </p>
+                        <span class="d-block text-center">
+                            <a href="{%url 'signup'%}" class="btn btn-success">Join Now</a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- as Freelancer -->
+            <div class="col-lg-6 col-12 mb-3 px-4 colo">
+                <div class="row">
+                    <!-- img -->
+                    <div class="col-lg-3 col-4 sideImg2"></div>
+                    <div class="col-lg-9 col-8 bg-light px-2 py-4">
+                        <span class="d-block h4 text-center mb-3">Start As Freelancer</span>
+                        <p class="text-center">
+                            Join as Freelancer and get opportunities to work with the best businesses in the marketplace while still hornong your skills.
+                        </p>
+                        <span class="d-block text-center">
+                            <a href="{%url 'signup'%}" class="btn btn-success">Join Now</a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- join now section ends here -->
+
+     <!-- footer content -->
+ <footer class="w-100 pt-3 pb-0 px-2 mb-0 d-flex flex-column">
+    <!-- footer section begins here -->
+    <div class="row bg-dark py-3 px-3">
+     <!-- About column -->
+     <div class="col-lg-6 col-12 my-3">
+       <span class="h5 d-block text-start text-white">
+         About Us
+       </span>
+
+       <span class="d-block line-green my-2"></span>
+       <p class="my-3 text-white pe-3">
+         Beelancing is a premier platform connecting businesses with top freelance talent from around the world. Our mission is to provide a seamless and secure experience for both clients and freelancers, empowering individuals and businesses to achieve their goals. Whether you're looking to hire a freelancer or find work as a freelancer, our platform offers a range of services to meet your needs. Join our community today and discover the endless possibilities of freelance work!
+       </p>
+
+       <!-- Email -->
+       <div class="d-flex flex-column">
+         <a href="#" class="text-white d-block text-start my-2">
+           <i class="fas fa-envelope me-3"></i>
+           info@beelancing.com
+         </a>
+         <a href="#" class="text-white d-block text-start my-2">
+           <i class="fas fa-phone me-3"></i>
+           +254726979973
+         </a>
+       </div>
+
+
+     </div>
+     <!-- Quick links column -->
+     <div class="col-lg-3 col-md-6 col-12 my-3">
+       <span class="h5 d-block text-start text-white">
+         Quick Links
+       </span>
+       <span class="d-block line-green my-2"></span>
+       <!-- links -->
+       <div class="d-flex flex-column">
+         <a href="{%url 'index'%}" class="py-2 text-white d-block text-start links"><i class="fas fa-angle-right me-1"></i> Home</a>
+         <a href="{%url 'discover'%}" class="py-2 text-white d-block text-start links"><i class="fas fa-angle-right me-1"></i> Find Talent</a>
+         <a href="{%url 'dashboard'%}" class="py-2 text-white d-block text-start links"><i class="fas fa-angle-right me-1"></i> Find Work</a>
+         <a href="{%url 'dashboard'%}" class="py-2 text-white d-block text-start links"><i class="fas fa-angle-right me-1"></i> Job Posts</a>
+         <a href="{%url 'addjob'%}" class="py-2 text-white d-block text-start links"><i class="fas fa-angle-right me-1"></i> Post Job</a>
+         
+       </div>
+     </div>
+
+     <!-- Support links column -->
+     <div class="col-lg-3 col-md-6 col-12 my-3">
+       <span class="h5 d-block text-start text-white">
+         Support
+       </span>
+       <span class="d-block line-green my-2"></span>
+       <!-- links -->
+       <div class="d-flex flex-column">
+         <a href="{%url 'help'%}" class="py-2 text-white d-block text-start links"><i class="fas fa-angle-right me-1"></i> Help</a>
+         <a href="#" class="py-2 text-white d-block text-start links"><i class="fas fa-angle-right me-1"></i> FAQ</a>
+         <a href="#" class="py-2 text-white d-block text-start links"><i class="fas fa-angle-right me-1"></i> File Dispute</a>
+         <a href="{%url 'account'%}" class="py-2 text-white d-block text-start links"><i class="fas fa-angle-right me-1"></i> For Talent</a>
+         <a href="{%url 'account'%}" class="py-2 text-white d-block text-start links"><i class="fas fa-angle-right me-1"></i> For Client</a>
+         
+       </div>
+     </div>
+
+     <!-- social and copy -->
+     <div class="col-12 mt-4 mb-1 d-flex justify-content-between">
+       <!-- Copy -->
+       <span class="d-block text-start text-white h6">
+         Beelancing &copy 2023
+       </span>
+        <!-- socials -->
+        <div class="d-flex flex-row align-items-center my-2">
+         <a href="#" class="text-white">
+           <i class="fab fa-facebook me-3"></i>
+         </a>
+         <a href="#" class="text-white me-3">
+           <i class="fab fa-instagram"></i>
+         </a>
+         <a href="#" class="text-white me-3">
+           <i class="fab fa-twitter"></i>
+         </a>
+         <a href="#" class="text-white me-3">
+           <i class="fab fa-linkedin"></i>
+         </a>
+       </div>
+     </div>
+    </div>
+</footer>
+
+    
+
+    <!-- JQUERY JS LINK -->
+    <script src="{% static 'assets/js/jquery.js' %}"></script>
+
+    <!-- BOOTSTRAP JS LINK -->
+    <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/js/mdb.min.js' %}"></script>
+
+    <!-- FONTAWESOME JS LINK -->
+    <script src="{% static 'assets/js/all.js' %}"></script>
+
+    <!-- isotope filter js link -->
+    <script src="{% static 'assets/js/isotope.js' %}"></script>
+
+    <!-- main js link -->
+    <script src="{% static 'assets/js/main.js' %}"></script>
+</body>
+
+</html>

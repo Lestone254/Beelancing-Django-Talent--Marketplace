@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+{%load static%}
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Successful Payment</title>
+    <!-- bootstrap css link -->
+  <link rel="stylesheet" href="{% static 'assets/css/mdb.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+
+  <!-- fontawesome css link -->
+  <link rel="stylesheet" href="{% static 'assets/css/all.css' %}">
+
+  <!-- style css link -->
+  <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+</head>
+<body>
+<div class="container">
+	<div class="row justify-content-center">
+		<div class="col-12 col-md-4">
+			<div class="card">
+				<div class="card-body">
+					<div class="card-text">
+						<h1 class="h1">Hello  There! You Successfull Paid for the Job Titled:</h1>
+						<strong>{{job.Title}}</strong>
+					</div>
+					<a href="{%url 'myjobs'%}"><button class="btn btn-block btn-success">Check Your Job</button></a>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

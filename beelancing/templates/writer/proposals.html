@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+{%load static%}
+{%load customtags%}
+{%load humanize%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beelancing | Apply Job</title>
+
+    <!-- Bootstrap link -->
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/mdb.min.css' %}">
+
+    <!-- FONT AWESOME CSS LINK -->
+    <link rel="stylesheet" href="{% static 'assets/css/all.css' %}">
+
+    <!-- STYLE CSS LINK -->
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <!-- navbar begins here -->
+        <header class="header position-relative" id="header">
+          {%include 'writer/navbar.html'%}
+        </header>
+        <!-- navbar ends here -->
+    </div>
+
+ <main class="main px-3">
+     <!-- My Proposals -->
+  <div class="container d-flex align-content-center justify-content-center align-items-center mb-4">
+   
+    <div class="d-flex flex-column posto p-2 px-3" style="width: 822px;">
+      <span class="d-block text-start h6 py-3 fw-bold" style="width: 800px;">My Proposals</span>
+      <ul class="nav nav-tabs mb-3" id="myTab0" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link active"
+            id="home-tab0"
+            data-mdb-toggle="tab"
+            data-mdb-target="#home0"
+            type="button"
+            role="tab"
+            aria-controls="home"
+            aria-selected="true"
+          >
+            Active ({{active.count}})
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link"
+            id="profile-tab0"
+            data-mdb-toggle="tab"
+            data-mdb-target="#profile0"
+            type="button"
+            role="tab"
+            aria-controls="profile"
+            aria-selected="false"
+          >
+            Archived ({{archived.count}})
+          </button>
+        </li>
+      </ul>
+      
+      <div class="tab-content pt-4" id="myTabContent0">
+
+        <div
+          class="tab-pane fade show active"
+          id="home0"
+          role="tabpanel"
+          aria-labelledby="home-tab0"
+        >
+
+          {%for x in active%}
+          <!-- job item -->
+          <div class="container-fluid my-2">
+            <!-- header -->
+            <div class="d-flex justify-content-between mb-4">
+             <a href="#" class="text-decoration-none"><span class="h5 d-block text-dark text-start">{{x.Job.Title}}</span></a>
+            <div class="dropdown">
+              <button class="btn btn-sm shadow-none d-flex align-content-center p-2 batona" type="button" id="dropdownMenu2" data-mdb-toggle="dropdown" aria-expanded="false">
+                <i class="fas fa-ellipsis"></i>
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                <li> <a href="{%url 'savejob' x.Job.id %}" class="text-dark"> <button class="dropdown-item" type="button"><i class="fas fa-heart me-1"></i>Save Job</button></a></li>
+                <li> <a href="{%url 'job' x.Job.id %}" class="text-dark"> <button class="dropdown-item" type="button"><i class="fas fa-eye me-1"></i>View Post</button></a></li>
+                <li> <a href="{%url 'editprop' x.Job.id %}" <button class="dropdown-item" type="button"><i class="fas fa-pen me-1"></i>Apply Job</button></a></li>
+              </ul>
+            </div>
+            </div>
+
+            <!-- row container -->
+            <a href="#" class="row text-decoration-none">
+              <!-- Budget -->
+              <p class="text-muted d-flex flex-row">
+                <span class="me-1">Est.Budget:{{x.Job.Amount}}-</span>
+                <span class="me-1">{{x.Job.Level}} -</span>
+                <span>Posted {{x.Job.DateTime|naturaltime}}</span>
+              </p>
+
+              <!-- description -->
+              <p class="text-secondary">
+                {{x.Job.Description}}
+              </p>
+
+              <!-- status -->
+              <p class="text-dark fw-bold">
+                Status: {{x.Job.Status}}
+              </p>
+            </a>
+            <hr>
+          </div>
+          {%endfor%}
+          
+        </div>
+
+        <div class="tab-pane fade mt-3" id="profile0" role="tabpanel" aria-labelledby="profile-tab0">
+ 
+          {%for x in archived%}
+          <!-- job item -->
+          <div class="container-fluid my-2">
+            <!-- header -->
+            <div class="d-flex justify-content-between mb-4">
+             <a href="#" class="text-decoration-none"><span class="h5 d-block text-dark text-start">{{x.Job.Title}}</span></a>
+            <div class="dropdown">
+              <button class="btn btn-sm shadow-none d-flex align-content-center p-2 batona" type="button" id="dropdownMenu2" data-mdb-toggle="dropdown" aria-expanded="false">
+                <i class="fas fa-ellipsis"></i>
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                <li> <a href="{%url 'savejob' x.Job.id %}" class="text-dark"> <button class="dropdown-item" type="button"><i class="fas fa-heart me-1"></i>Save Job</button></a></li>
+                <li> <a href="{%url 'job' x.Job.id %}" class="text-dark"> <button class="dropdown-item" type="button"><i class="fas fa-eye me-1"></i>View Post</button></a></li>
+                <li> <a href="{%url 'editprop' x.Job.id %}" <button class="dropdown-item" type="button"><i class="fas fa-pen me-1"></i>Apply Job</button></a></li>
+              </ul>
+            </div>
+            </div>
+
+            <!-- row container -->
+            <a href="#" class="row text-decoration-none">
+              <!-- Budget -->
+              <p class="text-muted d-flex flex-row">
+                <span class="me-1">Est.Budget:{{x.Job.Amount}}-</span>
+                <span class="me-1">{{x.Job.Level}} -</span>
+                <span>Posted {{x.Job.DateTime|naturaltime}}</span>
+              </p>
+
+              <!-- description -->
+              <p class="text-secondary">
+                {{x.Job.Description}}
+              </p>
+
+              <!-- status -->
+              <p class="text-dark fw-bold">
+                Status: {{x.Job.Status}}
+              </p>
+            </a>
+            <hr>
+          </div>
+          {%endfor%}
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+ </main>
+
+    
+
+    <!-- JQUERY JS LINK -->
+    <script src="{% static 'assets/js/jquery.js' %}"></script>
+
+    <!-- BOOTSTRAP JS LINK -->
+    <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/js/mdb.min.js' %}"></script>
+
+    <!-- FONTAWESOME JS LINK -->
+    <script src="{% static 'assets/js/all.js' %}"></script>
+
+    <!-- isotope filter js link -->
+    <script src="{% static 'assets/js/isotope.js' %}"></script>
+
+    <!-- main js link -->
+    <script src="{% static 'assets/js/main.js' %}"></script>
+</body>
+
+</html>
+<div class="container-fluid px-2 mt-5 pt-4">

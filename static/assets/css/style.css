@@ -1,0 +1,558 @@
+ /* import font.css */
+
+ @import url(./font.css);
+
+ /* universal styling */
+ * {
+     font-family: "poppins", sans-serif;
+     font-size: 15px;
+ }
+ 
+ body{
+    overflow-x: hidden;
+ }
+
+::-webkit-scrollbar {
+background-color: #fffafa;
+width: 4px;
+}
+
+::-webkit-scrollbar-track {
+background-image:  linear-gradient(to right, #b3b1cb, #75757c);
+}
+
+::-webkit-scrollbar-thumb {
+background-image: linear-gradient(to right, #7c7c7c, #5a5a5a);
+}
+
+li {
+    list-style-type: none;
+}
+
+.logo {
+    color: #1a1a1a;
+}
+
+.logo:hover {
+    color: #1a1a1a;
+}
+
+.navBar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 12vh;
+  min-width: 100%;
+  background: #ffffff;
+  z-index: 99;
+}
+
+.navBar .nav-links {
+    color: #5c5c5c;
+    margin: 0 15px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.navBar .nav-links:hover {
+    color: #14A44D;
+}
+
+.searchBlock {
+  position: absolute;
+  width: 390px;
+  top: 45px;
+  left: 0;
+  min-height: 90px;
+}
+
+.headerSpan {
+  font-weight: 600;
+  color: #111;
+}
+
+main {
+  margin-top: 99px;
+}
+
+@media screen and (max-width: 768px) {
+  main {
+    margin-top: 150px;
+  }
+}
+
+.sign-in {
+    color: #5c5c5c;
+    font-weight: 600;
+}
+
+.sign-in:hover {
+    color: #7e7e7e;
+}
+
+.humburgerMenu {
+    cursor: pointer;
+    font-size: 21px;
+    display: none;
+}
+
+.humburgerMenu:hover {
+    color: #5c5c5c;
+}
+
+.side-bar {
+    background: #ffffff;
+    position: fixed;
+    top: 0;
+    left: -700px;
+    height: 100vh;
+    width: 374px;
+    z-index: 99;
+    transition: left .6s ease;
+}
+
+.left {
+    left: 0;
+}
+
+.side-bar {
+  overflow-y: scroll;
+}
+
+.side-bar button {
+    background: none;
+    border: none;
+    color: #5c5c5c;
+    outline: none;
+    font-size: 17px;
+}
+
+.side-bar button:hover {
+    color: #7e7e7e;
+}
+
+.side-bar .nav-links {
+    border-bottom: 30px;
+}
+
+.side-bar a, .side-bar .dropdown-btn {
+    padding: 16px;
+    border-radius: 2px;
+    text-decoration: none;
+    font-size: 17px;
+    display: block;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    width: 87%;
+    color: #111;
+    transition: 0.3s;
+  }
+
+  .side-bar .dropdown-btn {
+    background-color: #01280f00;
+    color: #111;
+  }
+  
+  .side-bar a:hover, .side-bar .dropdown-btn:hover, .side-bar .nav-links:hover {
+    background: #01e15b;
+    color: #ffffff;
+  }
+
+  .side-bar .dropdown-container {
+    display: none;
+    padding-left: 8px;
+  }
+
+  .side-bar .dropdown-container a {
+    display: block;
+    padding-left: 3rem;
+    font-size: 15px;
+    font-weight: 500;
+  }
+
+  .side-bar .active {
+    border-radius: 0px;
+    border-left: 2px solid #02c34f;
+    color: #02c34f;
+  }
+
+.home-banner {
+    min-height: 60vh;
+    background-image: url('../images/free2.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-top: 1px solid #b3b3b3;
+}
+
+.home-banner input {
+    height: 42px;
+    width: 240px;
+    border: 1px  solid #7e7e7e;
+    border-right: none;
+    border-radius: 4px 0 0 4px;
+    outline: none;
+}
+
+.home-banner .homeSearchBtn {
+    width: 90px;
+    height: 42.5px;
+    position: absolute;
+    top: 0;
+    left: 222px;
+}
+
+.homeCategory a {
+    height: 180px;
+}
+
+.homeJoin .colo {
+    height: 180px;
+}
+
+.homeJoin .sideImg {
+    background-image: url('../images/free.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: right;
+}
+
+.homeJoin .sideImg2 {
+    background-image: url('../images/img5.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.homeCategory .category a {
+    color: #1a1a1a;
+    margin-top: 9px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.homeCategory .category a:hover {
+    color: #5c5c5c;
+}
+
+.homeCategory .devIT {
+    background-image: url('../images/devIT.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.homeCategory .desCreative {
+    background-image: url('../images/designCreative.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.homeCategory .salesMarketing {
+    background-image: url('../images/salesMarketing.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.homeCategory .writingTranslation {
+    background-image: url('../images/writingTranslation.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.homeCategory .adminSupport {
+    background-image: url('../images/adminSupport.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.homeCategory .financeAcc {
+    background-image: url('../images/finance.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.homeCategory .engArchitecture {
+    background-image: url('../images/engArchitecture.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.homeCategory .legal {
+    background-image: url('../images/legal.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+
+/* footer section styling */
+footer {
+    position: relative;
+  }
+  
+  footer .h5 {
+    font-weight: 600;
+    color: #ffffff;
+    font-size: 17px;
+  }
+  
+  footer .line-green {
+    height: 2px;
+    background-color: #007E33;
+    width: 36px;
+  }
+  
+  footer p, footer a {
+    font-size: 14px;
+    color: #fbfbfb;
+  }
+  
+  .links:hover {
+    color: #0b6a3c;
+  }
+
+
+  /* sign up */
+  .signUp {
+    position: relative;
+    width: 100%;
+  }
+
+  .signUp input, .signUp select {
+    height: 42px;
+    outline: none;
+    border: 1px solid #75757c;
+    border-radius: 4px;
+    padding-left: 24px;
+  }
+
+  .signUp input::placeholder {
+    font-size: 14px;
+    color: #7c7c7c;
+  }
+
+  .signUp .signIcon {
+    position: absolute;
+    left: 18px;
+    top: 21%;
+  }
+
+  .signImg {
+    background-image: url('../images/img5.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: left;
+  }
+
+
+  /* client homempage styling */
+  .searchContainer {
+    position: relative;
+  }
+  .searchContainer form .searchCol {
+    position: relative;
+  }
+
+  .searchContainer form .searchCol input {
+    height: 42px;
+    width: 390px;
+    border: none;
+    border-radius: 2px;
+    border: 1px solid #7e7e7e;
+    outline: none;
+    padding-left: 30px;
+    font-size: 15px;
+    color: #5a5a5a;
+  }
+
+  .searchContainer form .searchCol input::placeholder {
+    font-size: 13px;
+    font-weight: 600;
+    color: #707070;
+  }
+
+  .searchContainer form .searchCol .searchIcon {
+    position: absolute;
+    left: 21px;
+    top: 26%;
+  }
+
+  /* post job page styling */
+  form.postjobForm {
+    position: relative;
+  }
+
+  form.postjobForm label {
+    font-size: 14px;
+    color: #1a1a1a;
+    font-weight: 600;
+  }
+
+  form.postjobForm input, form.postjobForm select {
+    height: 36px;
+    border-radius: 4px;
+    border: 1px solid #75757c;
+    outline: none;
+    font-size: 15px;
+    color: #5a5a5a;
+    padding-left: 6px;
+  }
+  
+
+  form.postjobForm input::placeholder, form.postjobForm select::placeholder {
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  /* ticket page styling */
+.ticket-container a:hover {
+    background-color: #ffffff;
+    scale: 1.01;
+    transition: all .1s ease-out;
+  }
+  
+  .ticket-container a:hover > span {
+    color: #4361ee;
+    font-weight: 500;
+  }
+  .ticket-container a p {
+    text-transform: none;
+    font-size: 14px;
+  }
+
+  /* Messages page */
+  .msgHead {
+    position: sticky;
+    top: 0;
+    z-index: 99;
+  }
+
+  .btmSending {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+  }
+
+  .msgInput {
+    width: 80%;
+    border: none;
+    outline: none;
+    color: #fbfbfb;
+    background-color: #4a4a4a;
+    letter-spacing: .5px;
+  }
+
+  .msgInput::placeholder {
+    color: #fbfbfb;
+    letter-spacing: .5px;
+  }
+
+  .mediaBtn {
+    color: #fbfbfb;
+    position: absolute;
+    left: 27px;
+    cursor: pointer;
+    top: 22px;
+    z-index: 99;
+  }
+
+  .mediaBtn:hover {
+    color: #b3b1cb;
+    transition: .2s ease;
+  }
+
+  .msgFile {
+    position: fixed;
+    width: 99%;
+    bottom: 72px;
+  }
+
+  .msgFile form input {
+    color: #fbfbfb;
+    font-weight: 300;
+    outline: none;
+    border: none;
+    border: 1px solid #fbfbfb;
+    width: 98%;
+  }
+  
+
+
+  /* extras */
+  .jobPostDesc {
+    font-size: 16px;
+    text-justify: distribute;
+    font-weight: 500;
+    line-height: 1.6;
+  }
+
+  .seeMore {
+    font-size: 13px;
+    text-transform: uppercase;
+    color: #4a4a4a;
+    font-weight: 600;
+  }
+
+  .seeMore:hover {
+    color: #1a1a1a;
+    text-decoration: underline;
+  }
+
+  .talentCard img {
+    transform: scale(1.0);
+    transition: transform .3s ease;
+  }
+
+  .talentCard img:hover {
+    transform: scale(1.01);
+  }
+
+  .talentCard .talentName {
+    color: #111;
+    font-size: 16px;
+    margin-top: 12px;
+    width: auto;
+  }
+
+  .talentCard .talentName:hover {
+    text-decoration: underline;
+  }
+
+  .talentCard .talentRating {
+    font-size: 13px;
+    padding: 6px 0;
+    font-weight: 600;
+  }
+
+  .proposal-text {
+    max-width: 930px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+
+  .proposal-text-container {
+    color: #4a4a4a;
+    border: 1px solid #d4d3d3;
+    max-height: 330px;
+    overflow-y: scroll;
+    font-size: 15px;
+    letter-spacing: .15px;
+    line-height: 1.6;
+  }
+
+  .userName {
+    color: #5a5a5a;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .messageCont {
+    color: #5c5c5c;
+    letter-spacing: .5px;
+    font-weight:500;
+    max-width: 270px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }

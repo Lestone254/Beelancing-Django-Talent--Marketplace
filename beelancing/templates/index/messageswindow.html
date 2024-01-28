@@ -1,0 +1,24 @@
+{%load humanize%}
+{%load customtags%}
+                 {%for x in chat.message_set.all%}
+                  {%if x.Type == "Received"%}
+
+            <div class="receiverMsgContainer mb-3">
+                <p class="receiverMsg mb-1 p-2 shadow border-start border-primary border-2">
+                    {{x.Body}}
+                </p>
+                <span class="d-block text-start p-2">
+                    <i class="far fa-clock me-1"></i> {{x.DateTime|naturaltime}}
+                </span>
+            </div>
+            {%else%}
+            <div class="senderMsgContainer mb-3">
+                <p class="senderMsg mb-1 p-2 shadow border-end border-success border-2">
+                   {{x.Body}}
+                </p>
+                <span class="d-block text-end p-2">
+                    {{x.DateTime|naturaltime}} <i class="far fa-clock ms-1"></i>
+                </span>
+            </div>
+            {%endif%}
+            {%endfor%}

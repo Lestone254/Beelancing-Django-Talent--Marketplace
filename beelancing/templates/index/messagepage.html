@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+{%load static%}
+{%load humanize%}
+{%load customtags%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beelancing | Messages Page</title>
+
+    <!-- Bootstrap link -->
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/mdb.min.css' %}">
+
+    <!-- FONT AWESOME CSS LINK -->
+    <link rel="stylesheet" href="{% static 'assets/css/all.css' %}">
+
+    <!-- STYLE CSS LINK -->
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+</head>
+<body class="position-relative">
+   <section class="px-2">
+     <div class="row">
+        <!-- head -->
+        <div class="col-12 d-flex justify-content-between bg-dark py-3 msgHead">
+            <div class="d-flex flex-row">
+                <!-- img -->
+                <img src="{{chat.To.Email|profilepic}}" alt="user name" height="60px" width="60px" class="rounded-circle d-block me-2">
+                <div class="d-flex flex-column">
+                    <a href="#" class="d-block text-start profileName mb-1">{{chat.To.FirstName}} {{chat.To.LastName}}</a>
+                    <!-- online status -->
+                    <span class="d-block text-start text-success mb-2">
+                       <i class="fas fa-circle me-1 fa-sm"></i> online
+                    </span>
+                    <!-- offline status -->
+                    <span class="d-none text-start text-primary mb-2">
+                       <i class="fas fa-circle me-1 fa-sm"></i> offline
+                    </span>
+                </div>
+            </div>>
+            </div>
+        </div>
+        <!-- Message body -->
+        <div class="col-12 p-4 position-relative" id="messageswindow">
+            <!-- sender -->
+
+                 {%for x in chat.message_set.all%}
+                  {%if x.Type == "Received"%}
+
+            <div class="receiverMsgContainer mb-3">
+                <p class="receiverMsg mb-1 p-2 shadow border-start border-primary border-2">
+                    {{x.Body}}
+                </p>
+                <span class="d-block text-start p-2">
+                    <i class="far fa-clock me-1"></i> {{x.DateTime|naturaltime}}
+                </span>
+            </div>
+            {%else%}
+            <div class="senderMsgContainer mb-3">
+                <p class="senderMsg mb-1 p-2 shadow border-end border-success border-2">
+                   {{x.Body}}
+                </p>
+                <span class="d-block text-end p-2">
+                    {{x.DateTime|naturaltime}} <i class="far fa-clock ms-1"></i>
+                </span>
+            </div>
+            {%endif%}
+            {%endfor%}
+            <!-- receiver -->
+        </div>
+        <!-- botttom sending menu -->
+        <div class="col-12 btmSending bg-dark py-3">
+            <form action="#" method="post" name="msgForm" class="msgForm d-flex flex-row position-relative" id="msgForm">
+                <input type="hidden" id="chat" name="chat" value="{{chat.id}}">
+                <!-- message field -->
+                <label for="msgInput" class="d-none"></label>
+                <input type="text" name="msgInput" class="msgInput rounded-pill ps-5" id="msg" placeholder="Message" required>
+                <button type="submit" class="btn btn-success rounded-pill mx-2" id="bsub">
+                    <i class="fas fa-paper-plane me-1"></i>
+                    <span class="d-none d-md-inline-block">Send</span>
+                </button>
+            </form>
+            <span class="d-block mediaBtn" id="mediaMsgBtn" title="send file"><i class="far fa-folder"></i></span>
+        </div>
+   </section>
+
+   <!-- attach file container -->
+   <div id="msgFile" class="msgFile px-1">
+    <form action="#" method="post" id="msgFileForm" name="msgFileForm" class="bg-dark shadow rounded py-3 px-1">
+        <label for="fileInput" class="d-none"></label>
+        <input type="file" name="fileInput" class="fileInput p-3 rounded-pill p-2 mx-2 my-4" id="fileInput" multiple required>
+        <div class="d-flex justify-content-start">
+            <button type="submit" class="btn btn-success mx-2 rounded-pill">
+                send
+            </button>
+            <button type="button" id="closeFileModal" class="btn btn-primary mx-2 rounded-pill">
+                cancel
+            </button>
+        </div>
+    </form>
+   </div>
+    
+
+    <!-- JQUERY JS LINK -->
+    <script src="{% static 'assets/js/jquery.js' %}"></script>
+
+    <!-- BOOTSTRAP JS LINK -->
+    <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/js/mdb.min.js' %}"></script>
+
+    <!-- FONTAWESOME JS LINK -->
+    <script src="{% static 'assets/js/all.js' %}"></script>
+
+    <!-- isotope filter js link -->
+    <script src="{% static 'assets/js/isotope.js' %}"></script>
+<script>
+$("#bsub").click(function(e){
+      e.preventDefault();
+      let csrf = $("csrfmiddlewaretoken").val();
+      let chat = $("#chat").val();
+      let message = $("#msg").val();
+            $("#msg").val("");
+        $.ajax({
+            type: "GET",
+            url: "{%url 'sendmessage'%}",
+            data:{csrfmiddlewaretoken: csrf, chat:chat, body:message },
+            contentType: "application/json; charset=utf-8",
+            success: function(result) {
+                //alert(result);
+                $("#messageswindow").html(result);
+  var elem = document.getElementById('messageswindow');
+  elem.scrollTop = elem.scrollHeight;
+            }
+        });
+});
+
+setInterval(function () {
+
+        $.ajax({
+            type: "GET",
+            url: "{%url 'refreshchat'%}",
+            data:{chat:{{chat.id}},},
+            contentType: "application/json; charset=utf-8",
+            success: function(result) {
+                //alert(result);
+                $("#messageswindow").html(result);
+  var elem = document.getElementById('messageswindow');
+  elem.scrollTop = elem.scrollHeight;
+            }
+        });
+}, 3000);
+</script>
+</body>
+
+</html>

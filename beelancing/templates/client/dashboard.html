@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+{%load static%}
+{%load customtags%}
+{%load humanize%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beelancing | Welcome</title>
+
+    <!-- Bootstrap link -->
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/mdb.min.css' %}">
+
+    <!-- FONT AWESOME CSS LINK -->
+    <link rel="stylesheet" href="{% static 'assets/css/all.css' %}">
+
+    <!-- STYLE CSS LINK -->
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+</head>
+<body>
+    <div class="w-100 position-relative">
+        <!-- navbar begins here -->
+        <header class="header ms-0 position-relative" id="header">
+          {%include 'client/navbar.html'%}
+        </header>
+        <!-- navbar ends here -->
+    </div>
+<main class="main px-3">
+     <!-- job posts section begins here -->
+     <div class="container my-3 my-lg-5 topo jobPosts-container shadow border border-dark rounded p-3">
+      <span class="d-block text-start mb-3 headerSpan">Your Job Postings</span>
+
+      <ul class="nav nav-tabs mb-3" id="myTab0" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button
+              class="nav-link taba fw-bold active"
+              id="home-tab0"
+              data-mdb-toggle="tab"
+              data-mdb-target="#home0"
+              type="button"
+              role="tab"
+              aria-controls="home"
+              aria-selected="true"
+            >
+              Active ({{jobs.count}})
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button
+              class="nav-link taba fw-bold"
+              id="profile-tab0"
+              data-mdb-toggle="tab"
+              data-mdb-target="#profile0"
+              type="button"
+              role="tab"
+              aria-controls="profile"
+              aria-selected="false"
+            >
+              Recently filled
+            </button>
+          </li>
+        </ul>
+
+        <div class="tab-content" id="myTabContent0">
+          <div
+            class="tab-pane fade show active"
+            id="home0"
+            role="tabpanel"
+            aria-labelledby="home-tab0"
+          >
+
+            <!-- Folder image -->
+            <div class="d-flex justify-content-center my-4">
+              <img src="{% static 'assets/images/folder2.png' %}" alt="Folder image" height="90px" width="105px">
+            </div>
+
+            {%if jobs%}
+            {%for x in jobs%}
+              <div class="container-fluid">
+                <!-- header -->
+                <div class="d-flex justify-content-between mb-4">
+                  <span class="h6 fw-bold d-block text-start">{{x.Title}}</span>
+                <div class="dropdown">
+                  <button class="btn btn-sm border border-dark d-flex align-content-center p-2 batona" type="button" id="dropdownMenu2" data-mdb-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-ellipsis"></i>
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    <li><a href="{%url 'job' x.id %}" class="dropdown-item" type="button"><i class="fas fa-eye me-2"></i> View Post</a></li>
+                  </ul>
+                </div>
+                </div>
+
+                <!-- row container -->
+                <div class="row">
+                  <!-- price and either or filled status -->
+                  <div class="col-lg-6 col-12">
+                    <span class="d-block">
+                      {{x.Rate}}-Price - $ {{x.Amount}}
+                      <!-- satus -->
+                      <span>Filled {{x.DateTime | naturaltime}}</span>
+                    </span>
+                  </div>
+
+                  <!-- Proposals -->
+                  <div class="col-lg-2 col-12 text-grey">
+                    <span class="text-start">({{x.proposal_set.all.count}} new)<a href="{%url 'viewproposals' x.id %}">proposals</a></span>
+
+                  </div>
+
+                  <!-- Messaged -->
+                  <div class="col-lg-2 col-12 text-grey">
+                    <span class="text-start">0</span>
+                    <br>
+                    Messaged
+                  </div>
+
+                  <!-- Hired -->
+                  <div class="col-lg-2 col-12 text-dark">
+                    <span class="text-primary fw-bold">{{x.proposal_set.all | hired}} </span>
+                    <br>
+                    Hired
+                  </div>
+                </div>
+              </div>
+            {%endfor%}
+              {%else%}
+              <span class="h5 d-block text-center">
+                No active job posts
+              </span>
+              {%endif%}
+            <p class="text-center">Post a job to the marketplace and let talent come to you.</p>
+
+            <!-- post a job button -->
+            <div class="d-flex justify-content-center align-items-center">
+              <a href="{%url 'addjob'%}" class="btn btn-success btn-md">Post a Job</a>
+            </div>
+          </div>
+
+          <div class="tab-pane fade" id="profile0" role="tabpanel" aria-labelledby="profile-tab0">
+            {%if recent%}
+            {%for x in recent%}
+              <div class="container-fluid">
+                <!-- header -->
+                <div class="d-flex justify-content-between mb-4">
+                  <span class="h6 fw-bold d-block text-start">{{x.Title}}</span>
+                <div class="dropdown">
+                  <button class="btn btn-sm border border-dark d-flex align-content-center p-2 batona" type="button" id="dropdownMenu2" data-mdb-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-ellipsis"></i>
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    <li><a href="{%url 'job' x.id %}" class="dropdown-item" type="button"><i class="fas fa-eye me-2"></i> View Post</a></li>
+                  </ul>
+                </div>
+                </div>
+
+                <!-- row container -->
+                <div class="row">
+                  <!-- price and either or filled status -->
+                  <div class="col-lg-6 col-12">
+                    <span class="d-block">
+                      {{x.Rate}}-Price - $ {{x.Amount}}
+                      <!-- satus -->
+                      <span>Filled {{x.DateTime | naturaltime}}</span>
+                    </span>
+                  </div>
+
+                  <!-- Proposals -->
+                  <div class="col-lg-2 col-12 text-grey">
+                    <span class="text-start">({{x.proposal_set.all.count}} new)</span>
+                    proposals
+                  </div>
+
+                  <!-- Messaged -->
+                  <div class="col-lg-2 col-12 text-grey">
+                    <span class="text-start">0</span>
+                    <br>
+                    Messaged
+                  </div>
+
+                  <!-- Hired -->
+                  <div class="col-lg-2 col-12 text-dark">
+                    <span class="text-primary fw-bold">0</span>
+                    <br>
+                    Hired
+                  </div>
+                </div>
+              </div>
+            {%endfor%}
+              {%else%}
+              <span class="h5 d-block text-center">
+                No recent job posts
+              </span>
+              {%endif%}
+          </div>
+        </div>
+
+  </div>
+  <!-- job posts section ends here -->
+
+  <!-- Talents section begins here -->
+  <div class="container my-3 my-lg-5 jobPosts-container shadow border border-dark rounded p-3">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+          <span class="d-block text-start headerSpan">Talents</span>
+          <a href="{%url 'discover' %}" class="seeMore d-block text-end">See More</a>
+      </div>
+
+      <ul class="nav nav-tabs mb-3" id="myTab0" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button
+              class="nav-link taba fw-bold active"
+              id="home-tab0"
+              data-mdb-toggle="tab"
+              data-mdb-target="#home1"
+              type="button"
+              role="tab"
+              aria-controls="home"
+              aria-selected="true"
+            >
+              Discover
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button
+              class="nav-link taba fw-bold"
+              id="profile-tab0"
+              data-mdb-toggle="tab"
+              data-mdb-target="#profile1"
+              type="button"
+              role="tab"
+              aria-controls="profile"
+              aria-selected="false"
+            >
+              Saved (0)
+            </button>
+          </li>
+        </ul>
+
+        <div class="tab-content" id="myTabContent0">
+          <div
+            class="tab-pane fade"
+            id="profile1"
+            role="tabpanel"
+            aria-labelledby="home-tab0"
+          >
+
+            <!-- Folder image -->
+            <div class="d-flex justify-content-center my-4">
+              <img src="{% static 'assets/images/folder2.png' %}" alt="Folder image" height="90px" width="105px">
+            </div>
+
+            <span class="h5 d-block text-center">
+              No saved talents
+            </span>
+            <p class="text-center">Discover and save talent to reach them easier</p>
+
+            <!-- post a job button -->
+            <div class="d-flex justify-content-center align-items-center">
+              <a href="{%url 'discover'%}" class="btn btn-success btn-md">Discover</a>
+            </div>
+          </div>
+
+          <div class="tab-pane fade show active" id="home1" role="tabpanel" aria-labelledby="profile-tab0">
+            <div class="row talentCard">
+              <!-- talent card -->
+              {%for x in talent%}
+              <div class="col-lg-3 col-6 mb-3">
+                  <a href="{%url 'viewprofile' x.Biodata.id%}" class="d-block">
+                    <img src="{{x.Pic.url}}" alt="user name" width="100%" height="171px" class="d-block rounded shadow mb-2">
+                  </a>
+                  <a href="{%url 'viewprofile' x.Biodata.id%}" class="talentName d-block text-start mb-2"><i class="far fa-user me-1"></i>{{x.Biodata.FirstName}} {{x.Biodata.LastName}} </a>
+                  <span class="talentRating d-block mb-1 text-start"><i class="far fa-star text-warning me-1"></i>{{x.Rate}}/5 ({{x.Biodata.review_set.all.count}} Reviews)</span>
+              </div>
+              {%endfor%}
+            </div>
+          </div>
+        </div>
+
+  </div>
+  <!-- Talents section ends here -->
+
+  <!-- Contracts section begins here -->
+  <div class="container my-3 my-lg-5 jobPosts-container shadow border border-dark rounded p-3">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+          <span class="d-block text-start headerSpan">Contracts</span>
+          <a href="#" class="seeMore d-block text-end">See More</a>
+      </div>
+
+      <ul class="nav nav-tabs mb-3" id="myTab0" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button
+              class="nav-link taba fw-bold active"
+              id="home-tab0"
+              data-mdb-toggle="tab"
+              data-mdb-target="#home2"
+              type="button"
+              role="tab"
+              aria-controls="home"
+              aria-selected="true"
+            >
+              Active (0)
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button
+              class="nav-link taba fw-bold"
+              id="profile-tab0"
+              data-mdb-toggle="tab"
+              data-mdb-target="#profile2"
+              type="button"
+              role="tab"
+              aria-controls="profile"
+              aria-selected="false"
+            >
+              Finished (1)
+            </button>
+          </li>
+        </ul>
+
+        <div class="tab-content" id="myTabContent0">
+          <div
+            class="tab-pane fade"
+            id="profile2"
+            role="tabpanel"
+            aria-labelledby="home-tab0"
+          >
+
+          <!-- contract item -->
+          <div class="container-fluid my-3 border-bottom border-dark py-3">
+              <!-- header -->
+              <div class="d-flex justify-content-between mb-4">
+                <span class="h5 d-block text-start">Job title goes here</span>
+                <div class="d-flex justify-content-end">
+                <div class="dropdown">
+                  <button class="btn btn-sm btn-outline-dark shadow d-flex align-content-center p-2 batona" type="button" id="dropdownMenu2" data-mdb-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-ellipsis"></i>
+                  </button>
+                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    <li><a href="#" class="dropdown-item"><i class="fas fa-dollar-sign me-2"></i> View payments</a></li>
+                    <li><a href="./messagepage.html" class="dropdown-item"><i class="far fa-envelope me-2"></i> Send a message</a></li>
+                    <li><hr><a href="./viewpost.html" class="dropdown-item"><i class="fas fa-eye me-2"></i> View job post</a><hr></li>
+                    <li><a href="./givefeedback.html" class="dropdown-item"><i class="far fa-star me-2"></i> Rate Talent</a></li>
+                    <li><a href="#" class="dropdown-item"><i class="fas fa-file-contract me-2"></i> End contract</a><hr></li>
+                    <li><a href="./viewwritersprofile.html" class="dropdown-item"><i class="far fa-user me-2"></i> View profile</a></li>
+                  </ul>
+                </div>
+                </div>
+              </div>
+
+              <!-- row container -->
+              <div class="row">
+                <!-- Profile image and name plus local time -->
+                <div class="col-lg-3 col-5">
+                  <!-- image -->
+                  <img src="{% static 'assets/images/img3.jpg' %}" alt="User name" height="150px" width="150px" class="rounded shadow">
+                </div>
+
+                <!-- Name and stack -->
+                <div class="col-lg-9 col-7 talentCard">
+                  <a href="#" class="talentName d-block text-start mb-2"><i class="far fa-user me-1"></i>Talent Name</a>
+                  <span class="categoryName d-block mb-3 text-start"><i class="fas fa-angle-double-down me-1"></i>Category Name</span>
+
+                  <!-- Status -->
+                  <span class="d-block text-start mb-1">
+                    Finished: Contract closed
+                  </span>
+
+                  <!-- Budget -->
+                  <span class="text-primary d-block">$45.00 Budget</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-pane fade show active" id="home2" role="tabpanel" aria-labelledby="profile-tab0">
+            <!-- Folder image -->
+            <div class="d-flex justify-content-center my-4">
+              <img src="{% static 'assets/images/folder2.png' %}" alt="Folder image" height="90px" width="105px">
+            </div>
+
+            <span class="h5 d-block text-center">
+              No active contracts
+            </span>
+            <p class="text-center">Post a job to the marketplace and let talent come to you for contract hire.</p>
+
+            <!-- post a job button -->
+            <div class="d-flex justify-content-center align-items-center">
+              <a href="{%url 'addjob'%}" class="btn btn-success btn-md">Post a Job</a>
+            </div>
+          </div>
+        </div>
+
+  </div>
+  <!-- Contracts section ends here -->
+
+  <!-- How to work with talents -->
+  <div class="container py-4 mb-5 border border-dark shadow rounded">
+      <div class="accordion accordion-flush" id="accordionFlushExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header bg-white" id="flush-headingOne">
+            <button class="accordion-button bg-white text-dark border-0" type="button" data-mdb-toggle="collapse"
+              data-mdb-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                <span class="d-block h6 text-start">How to work with talent</span>
+            </button>
+            <p class="py-3 text-secondary">Connect with the talent community, fast and at no cost.</p>
+          </h2>
+          <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne">
+            <div class="accordion-body">
+              <!-- row -->
+              <div class="row">
+                <!-- image -->
+                <div class="col-3">
+                  <img src="{% static 'assets/images/post.png' %}" alt="posting job depiction image" height="90px" width="90px">
+                </div>
+
+                <!-- notes -->
+                <div class="col-9 pb-4">
+                  <span class="h6 fw-bold d-block text-start">
+                    1. Post a job to the marketplace
+                  </span>
+                  <p class="py-1">Provide enough detail for great talent to figure out if the work is right for them. <br>
+                    (You can always edit your post, or send an invite to reach out to people directly.)
+                  </p>
+
+                  <a href="#" class="text-decoration-none">Check out examples of effective job posts</a>
+
+                </div>
+                <hr>
+              </div>
+
+              <!-- row -->
+              <div class="row">
+                <!-- image -->
+                <div class="col-3">
+                  <img src="{% static 'assets/images/cv2.png' %}" alt="CV depiction image" height="90px" width="90px">
+                </div>
+
+                <!-- notes -->
+                <div class="col-9 pb-4">
+                  <span class="h6 fw-bold d-block text-start">
+                    2. Get proposals from talent
+                  </span>
+                  <p class="py-1">
+                    A strong working relationship starts with open communication. Here's your chance to ask about experience, set expectations for what you need, and discuss terms of the work.
+                  </p>
+
+                </div>
+                <hr>
+              </div>
+
+              <!-- row -->
+              <div class="row">
+                <!-- image -->
+                <div class="col-3">
+                  <img src="{% static 'assets/images/chat.png' %}" alt="Chat depiction image" height="90px" width="90px">
+                </div>
+
+                <!-- notes -->
+                <div class="col-9 pb-4">
+                  <span class="h6 fw-bold d-block text-start">
+                    3. Start working togother
+                  </span>
+                  <p class="py-1">
+                    Once you both agree on terms, colloborate with simple and secure tools like chat, file sharing, and time tarcking.
+                  </p>
+
+                </div>
+                <hr>
+              </div>
+
+              <!-- row -->
+              <div class="row">
+                <!-- image -->
+                <div class="col-3">
+                  <img src="{% static 'assets/images/thumbs-up2.png' %}" alt="Thumbs up image" height="90px" width="90px">
+                </div>
+
+                <!-- notes -->
+                <div class="col-9 pb-4">
+                  <span class="h6 fw-bold d-block text-start">
+                    4. Pay for work you approve
+                  </span>
+                  <p class="py-1">
+                    Reports are useful for keeping track of payments and reviewing work. As you complete jobs, you can build trusting relationships with talent in a way that helps you both grow.
+                  </p>
+
+                  <a href="#" class="text-decoration-none">
+                    Read about payment protections, billing methods, taxes, and more
+                  </a>
+
+                </div>
+                <hr>
+              </div>
+
+              <!-- row -->
+              <div class="row">
+                <div class="col-12">
+                  <span class="h5 d-block text-start">
+                    Questions?
+                  </span>
+                  <p>
+                    Visit our
+                    <a href="#" class="text-decoration-none">Help Center</a>
+                    to learn more tips for finding the right talent.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</main>
+    
+     <!-- footer content -->
+ <footer class="w-100 pt-3 pb-0 px-2 mb-0 d-flex flex-column">
+    <!-- footer section begins here -->
+    <div class="row bg-dark py-3 px-3">
+     <!-- About column -->
+     <div class="col-lg-4 col-12 my-3">
+       <span class="h5 d-block text-start text-white">
+         About Us
+       </span>
+
+       <span class="d-block line-green my-2"></span>
+       <p class="my-3 text-white pe-3">
+         Beelancing is a premier platform connecting businesses with top freelance talent from around the world. Our mission is to provide a seamless and secure experience for both clients and freelancers, empowering individuals and businesses to achieve their goals. Whether you're looking to hire a freelancer or find work as a freelancer, our platform offers a range of services to meet your needs. Join our community today and discover the endless possibilities of freelance work!
+       </p>
+
+       <!-- Email -->
+       <div class="d-flex flex-column">
+         <a href="#" class="text-white d-block text-start my-2">
+           <i class="fas fa-envelope me-3"></i>
+           info@beelancing.com
+         </a>
+         <a href="#" class="text-white d-block text-start my-2">
+           <i class="fas fa-phone me-3"></i>
+           +254712345678
+         </a>
+       </div>
+
+
+     </div>
+     <!-- Quick links column -->
+     <div class="col-lg-4 col-md-6 col-12 my-3">
+       <span class="h5 d-block text-start text-white">
+         Quick Links
+       </span>
+       <span class="d-block line-green my-2"></span>
+       <!-- links -->
+       <div class="d-flex flex-column">
+         <a href="{%url 'clientdash'%}" class="py-2 text-white d-block text-start links"><i class="fas fa-angle-right me-1"></i> Home</a>
+         <a href="{%url 'discover'%}" class="py-2 text-white d-block text-start links"><i class="fas fa-angle-right me-1"></i> Find Talent</a>
+         <a href="#" class="py-2 text-white d-block text-start links"><i class="fas fa-angle-right me-1"></i> Find Work</a>
+         <a href="{%url 'alljobs'%}" class="py-2 text-white d-block text-start links"><i class="fas fa-angle-right me-1"></i> Job Posts</a>
+         <a href="{%url 'postjob'%}" class="py-2 text-white d-block text-start links"><i class="fas fa-angle-right me-1"></i> Post Job</a>
+         
+       </div>
+     </div>
+
+     <!-- Support links column -->
+     <div class="col-lg-4 col-md-6 col-12 my-3">
+       <span class="h5 d-block text-start text-white">
+         Support
+       </span>
+       <span class="d-block line-green my-2"></span>
+       <!-- links -->
+       <div class="d-flex flex-column">
+         <a href="#" class="py-2 text-white d-block text-start links"><i class="fas fa-angle-right me-1"></i> Help</a>
+         <a href="#" class="py-2 text-white d-block text-start links"><i class="fas fa-angle-right me-1"></i> FAQ</a>
+         <a href="#" class="py-2 text-white d-block text-start links"><i class="fas fa-angle-right me-1"></i> File Dispute</a>
+         <a href="#" class="py-2 text-white d-block text-start links"><i class="fas fa-angle-right me-1"></i> For Talent</a>
+         <a href="#" class="py-2 text-white d-block text-start links"><i class="fas fa-angle-right me-1"></i> For Client</a>
+         
+       </div>
+     </div>
+
+     <!-- social and copy -->
+     <div class="col-12 mt-4 mb-1 d-flex text-center justify-content-between">
+       <!-- Copy -->
+       <span class="d-block text-start text-white h6">
+         Beelancing &copy 2022
+       </span>
+        <!-- socials -->
+        <div class="d-flex flex-row align-items-center my-2">
+         <a href="#" class="text-white">
+           <i class="fab fa-facebook me-3"></i>
+         </a>
+         <a href="#" class="text-white me-3">
+           <i class="fab fa-instagram"></i>
+         </a>
+         <a href="#" class="text-white me-3">
+           <i class="fab fa-twitter"></i>
+         </a>
+         <a href="#" class="text-white me-3">
+           <i class="fab fa-linkedin"></i>
+         </a>
+       </div>
+     </div>
+    </div>
+</footer>
+
+    
+
+    <!-- JQUERY JS LINK -->
+    <script src="{% static 'assets/js/jquery.js' %}"></script>
+
+    <!-- BOOTSTRAP JS LINK -->
+    <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/js/mdb.min.js' %}"></script>
+
+    <!-- FONTAWESOME JS LINK -->
+    <script src="{% static 'assets/js/all.js' %}"></script>
+
+    <!-- isotope filter js link -->
+    <script src="{% static 'assets/js/isotope.js' %}"></script>
+    
+    <!-- main js link -->
+    <script src="{% static 'assets/js/main.js' %}"></script>
+</body>
+
+</html>

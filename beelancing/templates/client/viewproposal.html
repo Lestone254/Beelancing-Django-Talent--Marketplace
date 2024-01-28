@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+{%load static%}
+{%load humanize%}
+{%load customtags%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beelancing | View Proposal</title>
+
+    <!-- Bootstrap link -->
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/mdb.min.css' %}">
+
+    <!-- FONT AWESOME CSS LINK -->
+    <link rel="stylesheet" href="{% static 'assets/css/all.css' %}">
+
+    <!-- STYLE CSS LINK -->
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+</head>
+<body>
+    <div class="w-100 position-relative">
+        <!-- navbar begins here -->
+        <header class="header ms-0 position-relative" id="header">
+            {%include 'client/navbar.html'%}
+        </header>
+        <!-- navbar ends here -->
+    </div>
+
+   <main class="main px-3">
+     <!-- header container -->
+<div class="container-fluid px-2">
+    <!-- Row container -->
+    <div class="row my-5 border border-dark rounded">
+      <!-- column -->
+      <div class="col-12">
+         <!-- job item -->
+        <!-- job item -->
+        <div class="container-fluid my-2">
+           <!-- header -->
+           <div class="d-flex justify-content-between mb-4">
+            <a href="#" class="text-decoration-none"><span class="h5 d-block text-dark text-start">{{proposal.job.Title}}</span></a>
+           <div class="dropdown">
+             <button class="btn btn-sm shadow-none d-flex align-content-center p-2 batona" type="button" id="dropdownMenu2" data-mdb-toggle="dropdown" aria-expanded="false">
+               <i class="fas fa-ellipsis"></i>
+             </button>
+             <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+               <li><a class="dropdown-item" download="" href="{{proposal.Writer.CV.url}}"><i class="fas fa-download text-success me-1"></i>Get CV</a></li>
+               <li><a href="{%url 'viewprofile' proposal.Writer.Biodata.id %}" class="dropdown-item" target="_blank"><i class="far fa-user text-success me-1"></i>View Profile</a></li>
+               <li><button class="dropdown-item" type="button"><i class="far fa-message text-success me-1"></i>Interview</button></li>
+               <li><a href="{%url 'hire' proposal.id %}" class="dropdown-item" type="button"><i class="fas fa-pen text-success me-1"></i>Hire</a></li>
+               <li><button class="dropdown-item" type="button"><i class="far fa-heart text-success me-1"></i>Save Talent</button></li>
+               <li><button class="dropdown-item" type="button"><i class="fas fa-eye text-success me-1"></i>View Job Post</button></li>
+               <li><button class="dropdown-item" type="button"><i class="fas fa-ban text-danger me-1"></i>Dismiss</button></li>
+             </ul>
+           </div>
+           </div>
+
+           <!-- sent by -->
+           <span class="d-block text-start">
+            Sent By:
+            <a href="{%url 'viewprofile' proposal.Writer.Biodata.id %}" class="text-decoration-none" target="_blank">{{proposal.Writer.Biodata.FirstName}} {{proposal.Writer.Biodata.LastName}}</a>
+           </span>
+
+           <!-- row container -->
+           <a href="#" class="row text-decoration-none">
+             <!-- Budget -->
+             <p class="text-muted d-flex flex-row">
+               <span class="me-1">Est.Budget:${{proposal.Job.Amount}} -</span>
+               <span class="me-1">Entry -</span>
+               <span>Sent {{proposal.Sent|naturaltime}}</span>
+             </p>
+
+             <!-- description -->
+             <p class="d-block proposal-text-container rounded p-2">
+              {{proposal.Body}}
+             </p>
+             {%for x in proposal.file_set.all%}
+             <a href="{{x.File.url}}" class="btn btn-danger me-2 py-2 mb-2" download="">{{x.File.name}}</a>
+             {%endfor%}
+           </a>
+            <div class="d-flex flex-row ms-0">
+              <a href="{%url 'hire' proposal.id %}" class="btn btn-success py-2 me-2"><i class="fas fa-file-contract me-1"></i>Hire</a>
+              <a href="{%url 'startchat' proposal.Writer.Biodata.Email %}" class="btn btn-primary py-2 me-2"><i class="far fa-envelope me-1"></i> Message</a>
+           </div>
+         </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- header container -->
+   </main>
+    
+     <!-- footer content -->
+ <footer class="w-100 pt-3 pb-0 px-2 mb-0 d-flex flex-column">
+    <!-- footer section begins here -->
+    <div class="row bg-dark py-3 px-3">
+     <!-- About column -->
+     <div class="col-lg-4 col-12 my-3">
+       <span class="h5 d-block text-start text-white">
+         About Us
+       </span>
+
+       <span class="d-block line-green my-2"></span>
+       <p class="my-3 text-white pe-3">
+         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nisi, perspiciatis.
+          Sint enim adipisci nobis expedita veniam sed.
+       </p>
+
+       <!-- Email -->
+       <div class="d-flex flex-column">
+         <a href="#" class="text-white d-block text-start my-2">
+           <i class="fas fa-envelope me-3"></i>
+           info@beelancing.com
+         </a>
+         <a href="#" class="text-white d-block text-start my-2">
+           <i class="fas fa-phone me-3"></i>
+           +254712345678
+         </a>
+       </div>
+
+
+     </div>
+     <!-- Quick links column -->
+     <div class="col-lg-4 col-md-6 col-12 my-3">
+       <span class="h5 d-block text-start text-white">
+         Quick Links
+       </span>
+       <span class="d-block line-green my-2"></span>
+       <!-- links -->
+       <div class="d-flex flex-column">
+         <a href="#" class="py-2 text-white d-block text-start links"><i class="fas fa-angle-right me-1"></i> Home</a>
+         <a href="#" class="py-2 text-white d-block text-start links"><i class="fas fa-angle-right me-1"></i> Find Talent</a>
+         <a href="#" class="py-2 text-white d-block text-start links"><i class="fas fa-angle-right me-1"></i> Find Work</a>
+         <a href="#" class="py-2 text-white d-block text-start links"><i class="fas fa-angle-right me-1"></i> Job Posts</a>
+         <a href="#" class="py-2 text-white d-block text-start links"><i class="fas fa-angle-right me-1"></i> Post Job</a>
+         
+       </div>
+     </div>
+
+     <!-- Support links column -->
+     <div class="col-lg-4 col-md-6 col-12 my-3">
+       <span class="h5 d-block text-start text-white">
+         Support
+       </span>
+       <span class="d-block line-green my-2"></span>
+       <!-- links -->
+       <div class="d-flex flex-column">
+         <a href="#" class="py-2 text-white d-block text-start links"><i class="fas fa-angle-right me-1"></i> Help</a>
+         <a href="#" class="py-2 text-white d-block text-start links"><i class="fas fa-angle-right me-1"></i> FAQ</a>
+         <a href="#" class="py-2 text-white d-block text-start links"><i class="fas fa-angle-right me-1"></i> File Dispute</a>
+         <a href="#" class="py-2 text-white d-block text-start links"><i class="fas fa-angle-right me-1"></i> For Talent</a>
+         <a href="#" class="py-2 text-white d-block text-start links"><i class="fas fa-angle-right me-1"></i> For Client</a>
+         
+       </div>
+     </div>
+
+     <!-- social and copy -->
+     <div class="col-12 mt-4 mb-1 d-flex justify-content-between">
+       <!-- Copy -->
+       <span class="d-block text-start text-white h6">
+         Beelancing &copy 2022
+       </span>
+        <!-- socials -->
+        <div class="d-flex flex-row align-items-center my-2">
+         <a href="#" class="text-white">
+           <i class="fab fa-facebook me-3"></i>
+         </a>
+         <a href="#" class="text-white me-3">
+           <i class="fab fa-instagram"></i>
+         </a>
+         <a href="#" class="text-white me-3">
+           <i class="fab fa-twitter"></i>
+         </a>
+         <a href="#" class="text-white me-3">
+           <i class="fab fa-linkedin"></i>
+         </a>
+       </div>
+     </div>
+    </div>
+</footer>
+
+    
+
+    <!-- JQUERY JS LINK -->
+    <script src="{% static 'assets/js/jquery.js' %}"></script>
+
+    <!-- BOOTSTRAP JS LINK -->
+    <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/js/mdb.min.js' %}"></script>
+
+    <!-- FONTAWESOME JS LINK -->
+    <script src="{% static 'assets/js/all.js' %}"></script>
+
+    <!-- isotope filter js link -->
+    <script src="{% static 'assets/js/isotope.js' %}"></script>
+
+    <!-- main js link -->
+    <script src="{% static 'assets/js/main.js' %}"></script>
+</body>
+
+</html>

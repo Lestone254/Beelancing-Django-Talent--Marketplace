@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beelancing | Sign Up</title>
+
+    <!-- Bootstrap link -->
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/mdb.min.css' %}">
+
+    <!-- FONT AWESOME CSS LINK -->
+    <link rel="stylesheet" href="{% static 'assets/css/all.css' %}">
+
+    <!-- STYLE CSS LINK -->
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+</head>
+<body>
+     
+    <div class="container d-flex flex-column justify-content-center align-content-center align-items-center mt-5">
+        <div class="container ps-0 row shadow">
+            <div class="col-lg-5 d-none d-md-block signImg">
+            </div>
+            <div class="col-lg-7 col-12">
+                <form action="" method="post" class="signUp py-4" id="signUp" name="signUp" onsubmit="return validateForm()">
+                    {%csrf_token%}
+                    <div class="row">
+                        <div class="col-12">
+                            <!-- logo -->
+                            <a href="#" class="d-block text-center fw-bold logo mb-5 pb-3"><span class="text-success">Bee</span>lancing | Sign Up</a>
+                    {%if error%}
+                    <div class="alert alert-danger">
+                      {{error}}
+                    </div>
+                    {%endif%}
+                        </div>
+                        <div class="col-lg-6 col-12 mb-3 position-relative">
+                            <label for="fname" class="d-none"></label>
+                            <input type="text" id="fname" name="fname" class="w-100 fname" placeholder="First Name">
+                            <span class="signIcon">
+                                <i class="far fa-user"></i>
+                            </span>
+                            <small class="text-danger d-none" id="fnameError">
+                                Incorrect format or empty field
+                            </small>
+                        </div>
+                        <div class="col-lg-6 col-12 mb-3 position-relative">
+                            <label for="lname" class="d-none"></label>
+                            <input type="text" id="lname" name="lname" class="w-100 lname" placeholder="Last Name" required>
+                            <span class="signIcon">
+                                <i class="far fa-user"></i>
+                            </span>
+                            <small class="text-danger d-none" id="lnameError">
+                                Incorrect format or empty field
+                            </small>
+                        </div>
+                        <div class="col-12 mb-3 position-relative">
+                            <label for="semail" class="d-none"></label>
+                            <input type="email" id="semail" name="semail" class="w-100 semail" placeholder="Email Address" required>
+                            <span class="signIcon">
+                                <i class="far fa-envelope"></i>
+                            </span>
+                        </div>
+                        <div class="col-12 mb-3 position-relative">
+                            <label for="accountType" class="d-none"></label>
+                            <select name="atype"  class="select w-100" required>
+                                <option value="" selected disabled>Account Type</option>
+                                <option value="Client">Client</option>
+                                <option value="Writer">Talent</option>
+                            </select>
+                            <span class="signIcon">
+                                <i class="fas fa-users"></i>
+                            </span>
+                        </div>
+                        <div class="col-12 mb-3 position-relative">
+                            <label for="spsw" class="d-none"></label>
+                            <input type="password" id="spsw" name="spsw" class="w-100 spsw bg-white" placeholder="Enter Password" required>
+                            <span class="signIcon">
+                                <i class="fas fa-lock"></i>
+                            </span>
+                        </div>
+                        <div class="col-12 mb-3 position-relative">
+                            <span class="h6 d-block text-start">
+                                By creating an account you have read and agreed to <a href="{%url 'terms'%}">Terms & Privacy Policy</a>
+                            </span>
+                        </div>
+                        <div class="col-12 mb-3">
+                            <button class="btn btn-success btn-lg btn-block" id="signBtn">Sign Up</button>
+                        </div>
+                        <div class="col-12 mb-3">
+                            <span class="d-block text-start">
+                                Already have an account?
+                                <a href="{%url 'signin'%}">Log In</a>
+                            </span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    
+
+    <!-- JQUERY JS LINK -->
+    <script src="{% static 'assets/js/jquery.js' %}"></script>
+
+    <!-- BOOTSTRAP JS LINK -->
+    <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/js/mdb.min.js' %}"></script>
+
+    <!-- FONTAWESOME JS LINK -->
+    <script src="{% static 'assets/js/all.js' %}"></script>
+
+    <!-- isotope filter js link -->
+    <script src="{% static 'assets/js/isotope.js' %}"></script>
+
+    <!-- main js link -->
+    <script src="{% static 'assets/js/main.js' %}"></script>
+</body>
+
+</html>

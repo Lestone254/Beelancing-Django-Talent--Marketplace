@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+{%load static%}
+{%load customtags%}
+{%load humanize%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beelancing | Apply Job</title>
+
+    <!-- Bootstrap link -->
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/mdb.min.css' %}">
+
+    <!-- FONT AWESOME CSS LINK -->
+    <link rel="stylesheet" href="{% static 'assets/css/all.css' %}">
+
+    <!-- STYLE CSS LINK -->
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <!-- navbar begins here -->
+        <header class="header position-relative" id="header">
+            {%include 'writer/navbar.html'%}
+        </header>
+        <!-- navbar ends here -->
+    </div>
+
+    <main class="main">
+        <!--  job application form goes here -->
+    <div class="container px-2 mt-5 pt-4">
+        <!-- Job Title -->
+        <span class="h2 d-block text-start mb-2 px-3">{{job.Title}}</span>
+      
+  <!-- form -->
+  <form action="{%url 'applyjob'%}" method="post" class="applyform px-3" enctype="multipart/form-data">
+    {%csrf_token%}
+    <input type="hidden" name="job" value={{job.id}}>
+    <div class="form-group mb-4">
+        <label for="proposal" class="form-label fw-bold d-block mt-4 mb-3">
+            Type your proposal
+        </label>
+        <textarea name="proposal" id="prposal" class="rounded p-3 w-100" cols="120" rows="10" placeholder="Type you proposal here..."></textarea>
+    </div>
+
+    <div class="form-group mb-5">
+        <label class="form-label fw-bold" for="customFile">Attach file(s)</label>
+        <input type="file" class="form-control d-block" id="customFile" name="files" multiple />
+    </div>
+
+    <div class="form-group mb-3">
+        <input type="submit" value="Submit proposal" class="btn btn-success">
+        <button type="button" class="btn sec-btn">Cancel</button>
+    </div>
+  </form>
+      </div>
+    <!--  job application form goes here section ends here -->
+    </main>
+
+    
+
+    <!-- JQUERY JS LINK -->
+    <script src="{% static 'assets/js/jquery.js' %}"></script>
+
+    <!-- BOOTSTRAP JS LINK -->
+    <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/js/mdb.min.js' %}"></script>
+
+    <!-- FONTAWESOME JS LINK -->
+    <script src="{% static 'assets/js/all.js' %}"></script>
+
+    <!-- isotope filter js link -->
+    <script src="{% static 'assets/js/isotope.js' %}"></script>
+
+    <!-- main js link -->
+    <script src="{% static 'assets/js/main.js' %}"></script>
+</body>
+
+</html>

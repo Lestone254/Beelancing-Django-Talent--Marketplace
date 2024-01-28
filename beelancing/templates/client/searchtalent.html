@@ -1,0 +1,22 @@
+{%load customtags%}
+<div class="card mt-1 p-2 rounded-2  border-0">
+	{%if bios%}
+	{%for bio in bios%}
+	<a href="{%url 'viewprofile' bio.id %}" class="text-dark">
+		<div class="row my-2">
+			<div class="col-3">
+				<img src="{{bio.Email|profilepic}}" height="40px" width="40px" class="img rounded-circle">
+			</div>
+			<div class="col-9">
+				<div class="row">{{bio.FirstName}} {{bio.LastName}}</div>
+				<div class="row text-primary"><small>{% for x in bio.writer_set.all %} {{x.Profesion}} {%endfor%}</small></div>
+			</div>
+		</div>
+	</a>
+	{%endfor%}
+	{%else%}
+	  <span class="d-block text-center fw-bold py-2">
+	      <i class="far fa-folder-open text-dark me-2"></i>No matches found
+	  </span>
+	{%endif%}
+</div>

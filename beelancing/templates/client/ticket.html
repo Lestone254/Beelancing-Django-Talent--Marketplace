@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+{%load static%}
+{%load customtags%}
+{%load humanize%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beelancing | File Dispute</title>
+
+    <!-- Bootstrap link -->
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/mdb.min.css' %}">
+
+    <!-- FONT AWESOME CSS LINK -->
+    <link rel="stylesheet" href="{% static 'assets/css/all.css' %}">
+
+    <!-- STYLE CSS LINK -->
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+</head>
+<body>
+     <div class="w-100 position-relative">
+        <!-- navbar begins here -->
+        <header class="header ms-0 position-relative" id="header">
+          {%include 'client/navbar.html'%}
+        </header>
+        <!-- navbar ends here -->
+    </div>
+    <!-- Main content goes here -->
+     <main class="main px-3">
+    <div class="container pt-1">
+        <span class="d-block text-center h2 my-3 py-3">File Ticket</span> 
+
+        <p class="py-1">
+            Talk to us and let us help you if you have a problem or an inquiry on our platform or even a dispute with another party within our platform.
+            Simply submit a ticket by slecting the appropriate department below.
+        </p>
+
+        <div class="row mx-1 py-3 rounded mb-2 ticket-container">
+            <div class="col-lg-6 col-12 mb-3">
+                <a href="{%url 'openticket'%}" class="btn py-2 btn-block shadow">
+                    <span class="d-block text-start">
+                        <i class="far fa-envelope me-1"></i>
+                        Technical Support
+                    </span>
+                    <p class="py-2 text-start text-muted">
+                        This department is for technical assistance
+                    </p>
+                </a>
+            </div>
+            <div class="col-lg-6 col-12 mb-3">
+                <a href="{%url 'openticket'%}" class="btn py-2 btn-block shadow">
+                    <span class="d-block text-start">
+                        <i class="fas fa-ticket me-1"></i>
+                        File Dispute
+                    </span>
+                    <p class="py-2 text-start text-muted">
+                        This department is for client-talent dispute.
+                    </p>
+                </a>
+            </div>
+            <div class="col-lg-6 col-12 mb-3">
+                <a href="{%url 'openticket'%}" class="btn py-2 btn-block shadow">
+                    <span class="d-block text-start">
+                        <i class="far fa-comment me-1"></i>
+                        General inquiries
+                    </span>
+                    <p class="py-2 text-start text-muted">
+                        This is for sales and general inquiries.
+                    </p>
+                </a>
+            </div>
+            <div class="col-lg-6 col-12 mb-3">
+                <a href="{%url 'openticket'%}" class="btn py-2 btn-block shadow">
+                    <span class="d-block text-start">
+                        <i class="far fa-flag me-1"></i>
+                        Abuse
+                    </span>
+                    <p class="py-2 text-start text-muted">
+                        This is for all matters pertaining abuse.
+                    </p>
+                </a>
+            </div>
+            <div class="col-lg-6 col-12 mb-3">
+                <a href="{%url 'openticket'%}" class="btn py-2 btn-block shadow">
+                    <span class="d-block text-start">
+                        <i class="fas fa-dollar-sign me-1"></i>
+                        Billing
+                    </span>
+                    <p class="py-2 text-start text-muted">
+                        Use this to request support for billing related issues.
+                    </p>
+                </a>
+            </div>
+
+             <div class="col-lg-6 col-12 mb-3">
+                <a href="{%url 'mytickets'%}" class="btn py-2 btn-block shadow">
+                    <span class="d-block text-start">
+                        <i class="fas fa-dollar-sign me-1"></i>
+                        My Tickets
+                    </span>
+                    <p class="py-2 text-start text-muted">
+                        See the tickects you have filed
+                    </p>
+                </a>
+            </div>
+
+        </div>
+
+
+    </div>
+ </main>
+    <!-- Main content ends here -->
+
+    
+
+    <!-- JQUERY JS LINK -->
+    <script src="{% static 'assets/js/jquery.js' %}"></script>
+
+    <!-- BOOTSTRAP JS LINK -->
+    <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/js/mdb.min.js' %}"></script>
+
+    <!-- FONTAWESOME JS LINK -->
+    <script src="{% static 'assets/js/all.js' %}"></script>
+
+    <!-- isotope filter js link -->
+    <script src="{% static 'assets/js/isotope.js' %}"></script>
+s
+    <!-- main js link -->
+    <script src="{% static 'assets/js/main.js' %}"></script>
+</body>
+
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+{%load static%}
+{%load humanize%}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beelancing| Saved Jobs</title>
+
+  <!-- bootstrap css link -->
+  <link rel="stylesheet" href="{% static 'assets/css/mdb.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+
+  <!-- fontawesome css link -->
+  <link rel="stylesheet" href="{% static 'assets/css/all.css' %}">
+
+  <!-- style css link -->
+  <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+</head>
+<body>
+  <!-- header -->
+ <header class="main-head pb-2">
+  <!-- Navbar -->
+  {%include 'writer/navbar.html'%}
+<!-- Navbar -->
+</header>
+
+<main class="main px-3">
+    <!-- header container -->
+<div class="container-fluid px-2 mt-5 pt-4">
+
+  <!-- Jobs you might like -->
+  <div class="container d-flex align-content-center align-items-center mb-4">
+   
+    <div class="d-flex flex-column posto w-100 p-2 px-3">
+      <span class="d-block text-start h6 py-3 fw-bold">Saved Jobs</span>
+      
+      <!-- job item -->
+      {%for x in savedjobs%}
+      <div class="container-fluid shadow border border-dark rounded p-3 my-2">
+        <!-- header -->
+        <div class="d-flex justify-content-between mb-4">
+         <a href="#" class="text-decoration-none"><span class="h5 d-block text-dark text-start">{{x.Job.Title}}</span></a>
+        <div class="dropdown">
+          <button class="btn btn-sm shadow-none d-flex align-content-center p-2 batona" type="button" id="dropdownMenu2" data-mdb-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-ellipsis"></i>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+            <li> <a href="{%url 'removejob' x.id %}" class="text-dark text-decoration-none"> <button class="dropdown-item" type="button"><i class="fas fa-ban me-1"></i>Remove Entry</button></a></li>
+            <li> <a href="{%url 'job' x.id %}" class="text-dark text-decoration-none"> <button class="dropdown-item" type="button"><i class="fas fa-eye me-1"></i>View Post</button></a></li>
+            <li> <a href="{%url 'editprop' x.id %}" <button class="dropdown-item" type="button"><i class="fas fa-pen me-1"></i>Apply Job</button></a></li>
+          </ul>
+        </div>
+        </div>
+
+        <!-- row container -->
+        <a href="#" class="row text-decoration-none">
+          <!-- Budget -->
+          <p class="text-muted d-flex flex-row">
+            <span class="me-1">Est.Budget:${{x.Job.Amount}} -</span>
+            <span class="me-1">{{x.Job.Level}}-</span>
+            <span>Posted {{x.Job.DateTime|naturaltime}}</span>
+          </p>
+
+          <!-- description -->
+          <p class="text-secondary">
+            {{x.Job.Description}}
+          </p>
+        </a>
+      </div>
+      {%endfor%}
+    </div>
+  </div>
+</div>
+<!-- header container -->
+</main>
+
+  <!-- jquery js link -->
+  <script src="{% static 'assets/js/jquery.js' %}"></script>
+
+  <!-- bootstrap js link -->
+  <script src="{% static 'assets/js/mdb.min.js' %}"></script>
+  <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+
+  <!-- fontawesome js link -->
+  <script src="{% static 'assets/js/all.js' %}"></script>
+
+  <!-- main js link -->
+  <script src="{% static 'assets/js/main.js' %}"></script>
+</body>
+</html>

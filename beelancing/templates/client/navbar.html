@@ -1,0 +1,171 @@
+           {%load static%}
+           {%load customtags%}
+           {%load humanize%}
+             <script src="{% static 'assets/js/jquery.js' %}"></script>
+            <nav class="navBar shadow px-4 d-flex justify-content-between align-items-center py-3" id="navabr">
+                <div class="humb-logo-container d-flex flex-row align-items-center">
+                    <!-- hamburger menu -->
+                    <div id="humburgerMenu">
+                        <span class="humburgerMenu fas fa-bars me-2 d-block"></span>
+                    </div>
+                    <!-- logo -->
+                    <a href="/" class="d-block fw-bold logo"><span class="text-success">Bee</span>lancing</a>
+                </div>
+
+                 <!-- search bar scetion begins here -->
+                <div class="searchContainer position-relative d-none d-md-flex justify-content-center align-items-center">
+                  <form action="" method="GET" class="searchForm" id="searchForm">
+                      <div class="row">
+                          <div class="col-12 searchCol">
+                              <label for="saerchHome" class="d-none"></label>
+                              <input type="search" class="searchInput d-block bg-white" id="searchHome" placeholder="search" required>
+                              <span class="searchIcon">
+                                  <i class="fas fa-search"></i>
+                              </span>
+                          </div>
+                      </div>
+                  </form>
+
+                  <div class="searchBlock p-3 rounded " id="search-menu">
+                  </div>
+              </div>
+              <!-- search bar section ends here -->
+
+    
+                <!-- messages, notification and account profile -->
+                <div class="d-flex flex-row align-items-center sign-join">
+                    <a href="#" class="mx-2 sign-in d-inline d-md-none">
+                        <i class="fas fa-search  me-1"></i>
+                    </a>
+                    <a href="{%url 'chat'%}" class="mx-2 sign-in">
+                        <i class="far fa-envelope  me-1"></i>
+                    </a>
+                    <a href="{%url 'nots'%}" class="mx-2 sign-in">
+                        <i class="far fa-bell  me-1"></i>
+                    </a>
+    
+                    <!-- profile -->
+                <div class="dropdown">
+                    <a href="#" class="dropdown-toggle d-flex align-items-center hidden-arrow" id="navbarDropdownMenuAvatar" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                        <img src="{{request.user.username|profilepic}}" alt="Profile Picture" height="35" width="35" class="rounded-circle border-secondary" loading="lazy">
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
+                            <li>
+                                <a href="{%url 'account'%}" class="dropdown-item"><i class="far fa-user me-1"></i> Dashboard</a>
+                            </li>
+                            <li>
+                                <a href="{%url 'history'%}" class="dropdown-item"><i class="fas fa-dollar-sign me-1"></i> Transactions</a>
+                            </li>
+                            <li>
+                                <a href="#" class="dropdown-item"><i class="fas fa-cog me-1"></i>Settings</a>
+                            </li>
+                            <li>
+                                <a href="{%url 'out'%}" class="dropdown-item"><i class="fas fa-sign-out me-1"></i>Logout</a>
+                            </li>
+                        </ul>
+                    </a>
+                </div>
+                </div>
+    
+                <!-- sidebar -->
+                <div class="side-bar shadow d-block" id="side-bar">
+                    <span class="d-flex justify-content-between text-end pb-0 mt-4 px-4">
+                        <!-- logo -->
+                        <a href="/" class="d-block p-0 text-start fw-bold bg-white logo"><span class="text-success">Bee</span>lancing</a>
+    
+                        <button type="button" id="closeBtn">
+                            <i class="fas fa-close"></i>
+                        </button>
+                    </span>
+                    
+                    <div class="d-flex flex-column pt-2">
+                        <a href="{%url 'account'%}" class="ms-2 my-3 dropdown-btn active"><i class="fas fa-home me-1"></i>Home</a>
+                        <a href="#" class="ms-2 mb-3 dropdown-btn">
+                            <div class="d-flex justify-content-between">
+                              <span class="d-block text-start">
+                                <i class="far fa-folder me-1"></i>
+                                Jobs
+                              </span>
+                              <span class="d-block text-start">
+                                <i class="fa fa-caret-down"></i>
+                              </span>
+                            </div>
+                          </a>
+                          <div class="dropdown-container">
+                            <a href="{%url 'myjobs'%}"><i class="fas fa-angle-right me-1"></i>My Jobs</a>
+                            <a href="{%url 'alljobs'%}"><i class="fas fa-angle-right me-1"></i>All Job Posts</a>
+                            <a href="{%url 'allcontracts'%}"><i class="fas fa-angle-right me-1"></i>All Contracts</a>
+                            <a href="{%url 'addjob'%}"><i class="fas fa-angle-right me-1"></i>Post Job</a>
+                          </div>
+                        <a href="#" class="ms-2 mb-3 dropdown-btn">
+                            <div class="d-flex justify-content-between">
+                              <span class="d-block text-start">
+                                <i class="fas fa-users me-1"></i>
+                                Talent
+                              </span>
+                              <span class="d-block text-start">
+                                <i class="fa fa-caret-down"></i>
+                              </span>
+                            </div>
+                          </a>
+                          <div class="dropdown-container">
+                            <a href="{%url 'discover'%}"><i class="fas fa-angle-right me-1"></i>Discover</a>
+                            <a href="#"><i class="fas fa-angle-right me-1"></i>Saved</a>
+                            <a href="{%url 'hires'%}"><i class="fas fa-angle-right me-1"></i>Your Hires</a>
+                          </div>
+                        <a href="#" class="ms-2 mb-3 dropdown-btn">
+                            <div class="d-flex justify-content-between">
+                              <span class="d-block text-start">
+                                <i class="fas fa-dollar-sign me-1"></i>
+                                Transactions
+                              </span>
+                              <span class="d-block text-start">
+                                <i class="fa fa-caret-down"></i>
+                              </span>
+                            </div>
+                          </a>
+                          <div class="dropdown-container">
+                            <a href="{%url 'history'%}"><i class="fas fa-angle-right me-1"></i>General</a>
+                          </div>
+                        <a href="#" class="ms-2 mb-3 dropdown-btn">
+                            <div class="d-flex justify-content-between">
+                              <span class="d-block text-start">
+                                <i class="fas fa-question me-1"></i>
+                                Help
+                              </span>
+                              <span class="d-block text-start">
+                                <i class="fa fa-caret-down"></i>
+                              </span>
+                            </div>
+                          </a>
+                          <div class="dropdown-container">
+                            <a href="#"><i class="fas fa-angle-right me-1"></i>Help & Support</a>
+                            <a href="{%url 'tickets'%}"><i class="fas fa-angle-right me-1"></i>Dispute</a>
+                          </div>
+                    </div>
+                </div>
+            </nav>
+
+    <script >
+function sendAjaxRequest() {
+  // Get the value of the input field
+  var inputValue = $("#searchHome").val();
+
+  // Send the AJAX request
+  $.ajax({
+    method: "GET",
+    url: "{%url 'searchtalent'%}",
+    data: {
+      search: inputValue
+    }
+  })
+  .done(function(response) {
+    // Update the HTML of the search menu using the response
+    $("#search-menu").show();
+    $("#search-menu").html(response);
+  });
+}
+
+$("#searchHome").on("keyup", sendAjaxRequest);
+
+
+  </script>

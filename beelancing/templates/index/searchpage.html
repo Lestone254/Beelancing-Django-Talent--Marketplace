@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+{%load static%}
+{%load customtags%}
+{%load humanize%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beelancing | Search</title>
+
+    <!-- Bootstrap link -->
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/mdb.min.css' %}">
+
+    <!-- FONT AWESOME CSS LINK -->
+    <link rel="stylesheet" href="{% static 'assets/css/all.css' %}">
+
+    <!-- STYLE CSS LINK -->
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+</head>
+<body>
+    <div class="w-100 position-relative">
+        <!-- navbar begins here -->
+        <header class="header ms-0 position-relative" id="header">
+            {%include 'index/navbar.html'%}
+        </header>
+        <!-- navbar ends here -->
+    </div>
+
+   <main class="main px-3">
+     <!-- search bar scetion begins here -->
+     <div class="searchContainer d-flex justify-content-center align-items-center mb-4">
+        <form action="{%url 'searchpage'%}" method="post" class="searchForm" id="searchForm">
+            {%csrf_token%}
+            <div class="row">
+                <div class="col-12 searchCol">
+                    <label for="saerchHome" class="d-none"></label>
+                    <input type="search" name="search" class="searchInput d-block bg-white" id="searchHome" placeholder="search" required>
+                    <span class="searchIcon">
+                        <i class="fas fa-search"></i>
+                    </span>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- search bar section ends here -->
+    <!-- search results begin here -->
+    <div class="container-fluid bg-white p-3">
+
+          {%if jobs%}
+          {%for x in jobs%}
+          <!-- job item -->
+          <div class="container-fluid my-2">
+            <!-- header -->
+            <div class="d-flex justify-content-between mb-4">
+             <a href="#" class="text-decoration-none"><span class="h5 d-block text-dark text-start">{{x.Title}}</span></a>
+            <div class="dropdown">
+              <button class="btn btn-sm shadow-none d-flex align-content-center p-2 batona" type="button" id="dropdownMenu2" data-mdb-toggle="dropdown" aria-expanded="false">
+                <i class="fas fa-ellipsis"></i>
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                <li> <a href="{%url 'savejob' x.id %}" class="text-dark"> <button class="dropdown-item" type="button"><i class="fas fa-heart me-1"></i>Save Job</button></a></li>
+                <li> <a href="{%url 'job' x.id %}" class="text-dark"> <button class="dropdown-item" type="button"><i class="fas fa-eye me-1"></i>View Post</button></a></li>
+                <li> <a href="{%url 'editprop' x.id %}" <button class="dropdown-item" type="button"><i class="fas fa-pen me-1"></i>Apply Job</button></a></li>
+              </ul>
+            </div>
+            </div>
+
+            <!-- row container -->
+            <a href="{%url 'job' x.id %}" class="row text-decoration-none">
+              <!-- Budget -->
+              <p class="text-muted d-flex flex-row">
+                <span class="me-1">Est.Budget:${{x.Amount}} -</span>
+                <span class="me-1">Level - {{x.Level}}</span>
+                <span>Posted {{x.DateTime | naturaltime}}</span>
+              </p>
+
+              <!-- description -->
+              <p class="text-secondary">
+                {{x.Description}}
+              </p>
+            </a>
+            <hr>
+          </div>
+          {%endfor%}
+          {%else%}
+                      <!-- no results -->
+                      <span class="d-block text-center fw-bold py-2">
+                          <i class="far fa-folder-open text-dark me-2"></i>No matches found
+                      </span>
+              {%endif%}
+    </div>
+    <!-- search results end here -->
+   </main>
+
+    <!-- JQUERY JS LINK -->
+    <script src="{% static 'assets/js/jquery.js' %}"></script>
+
+    <!-- BOOTSTRAP JS LINK -->
+    <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/js/mdb.min.js' %}"></script>
+
+    <!-- FONTAWESOME JS LINK -->
+    <script src="{% static 'assets/js/all.js' %}"></script>
+
+    <!-- isotope filter js link -->
+    <script src="{% static 'assets/js/isotope.js' %}"></script>
+
+    <!-- main js link -->
+    <script src="{% static 'assets/js/main.js' %}"></script>
+</body>
+
+</html>

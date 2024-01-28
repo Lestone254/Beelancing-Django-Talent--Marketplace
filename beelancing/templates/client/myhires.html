@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+{%load static%}
+{%load humanize%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beelancing | MyHires</title>
+
+    <!-- Bootstrap link -->
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/mdb.min.css' %}">
+
+    <!-- FONT AWESOME CSS LINK -->
+    <link rel="stylesheet" href="{% static 'assets/css/all.css' %}">
+
+    <!-- STYLE CSS LINK -->
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+</head>
+<body>
+    <div class="w-100 position-relative">
+        <!-- navbar begins here -->
+        <header class="header ms-0 position-relative" id="header">
+          {%include 'client/navbar.html'%}
+        </header>
+        <!-- navbar ends here -->
+    </div>
+
+   <main class="main px-3">
+<!-- header container -->
+<div class="container-fluid px-2" style="margin-top: 88px;">
+    <span class="h5 d-block text-start fw-bold mb-3">Your Hires</span>
+
+            {%for x in proposals%}
+    <div class="my-3 px-3 py-3">
+        <div class="container-fluid rounded-3 p-3 shadow">
+            <!-- header -->
+            <div class="d-flex justify-content-end mb-4">
+              <div class="d-flex flex-start flex-lg-end">
+                <a href="{%url 'viewprofile' x.Writer.Biodata.id%}" class="btn btn-success btn-sm rounded-0 me-2">View Profile</a>
+              <div class="dropdown">
+                <button class="btn btn-sm shadow-none d-flex align-content-center p-2 batona" type="button" id="dropdownMenu2" data-mdb-toggle="dropdown" aria-expanded="false">
+                  <i class="fas fa-ellipsis"></i>
+                </button>
+               <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                  <li><a href="#" class="dropdown-item">Rehire</a></li>
+                  <li><a href="#" class="dropdown-item">Invite to jb</a></li>
+                  <li><a href="#" class="dropdown-item">Add to save list</a></li>
+                  <li><a href="#" class="dropdown-item">Send Message</a></li>
+                </ul>
+              </div>
+              </div>
+            </div>
+
+            <!-- row container -->
+            <div class="row pt-4 pb-2">
+              <!-- Profile image and name plus local time -->
+              <div class="col-lg-2 col-3">
+                <!-- image -->
+                <img src="{{x.Writer.Pic.url}}" alt="User name" height="78px" width="78px" class="rounded-circle">
+              </div>
+
+              <!-- Name and local time -->
+              <div class="col-lg-5 col-9">
+                <!-- Name -->
+                <span class="h5 d-block text-start">
+                  {{x.Writer.Biodata.FirstName}} {{x.Writer.Biodata.LastName}}
+                </span>
+
+                <!-- rating -->
+                <div class="text-start">
+                    <!-- starts -->
+                    <span style="color: gold; font-size: 13px;">
+                        <i class="fas fa-star"></i>
+                    </span>
+                    <!-- starts -->
+                    <span style="color: gold; font-size: 13px;">
+                        <i class="fas fa-star"></i>
+                    </span>
+                    <!-- starts -->
+                    <span style="color: gold; font-size: 13px;">
+                        <i class="fas fa-star"></i>
+                    </span>
+                    <!-- starts -->
+                    <span style="color: gold; font-size: 13px;">
+                        <i class="fas fa-star"></i>
+                    </span>
+                    <!-- starts -->
+                    <span style="color: gold; font-size: 13px;">
+                        <i class="fas fa-star"></i>
+                    </span>
+                </div>
+
+                <!-- Jobs success rate -->
+                <span class="d-block text-start">
+                    Job succes rate:<span class="text-primary"> 75% (3/4)</span>
+                </span>
+
+                <!-- Earnings -->
+                <span class="d-block text-start">
+                    Earnings($):<span class="text-primary"> 50+</span>
+                </span>
+
+              </div>
+
+              <div class="col-lg-5 col-12">
+                <span class=" ps-1 mt-4 mt-lg-0 h6 d-block text-start">
+                    Description
+                  </span>
+
+                  <span class="ms-1 mb-2 d-block" style="background-color:rgb(92, 92, 92); width: 120px; height: 1.3px;"></span>
+                  <!-- Description text -->
+                  <p class="card-text text-start p-2">
+                      <!-- ICON -->
+                      <i class="fas fa-quote-left"></i>
+
+                      <!-- Description -->
+                      <span style="font-size: 14px;">
+                          {{x.Writer.Description}}
+                      </span>
+
+                      <span class="d-flex justify-content-end">
+                        <span class="mt-3 d-block" style="background-color:rgb(92, 92, 92); width: 120px; height: 1px;"></span>
+                      </span>
+                  </p>
+              </div>
+            </div>
+            <!-- contracts -->
+            <div class="row mb-3">
+                <div class="col-12 mb-4">
+                    <span class="fw-bold d-block text-start">Contracts</span>
+                </div>
+                <div class="col-12 d-flex justify-content-between">
+                    <!-- status -->
+                    <button class="btn-outline-success rounded-pill btn-sm me-3" disabled>{{x.Status}}</button>
+                    <!-- contarct title -->
+                    <span class="fw-bold d-block text-start">{{x.Job.Title}}</span>
+                    <span class="d-none d-lg-block text-muted">{{x.Job.Rate}}-{{x.Job.Amount}}</span>
+                </div>
+              </div>
+          </div>
+    </div>
+</div>
+          {%endfor%}
+        <!-- Proposals item section ends here -->
+   </main>
+
+     <!-- footer content -->
+ <footer class="w-100 pt-3 pb-0 px-2 mb-0 d-flex flex-column">
+    <!-- footer section begins here -->
+    <div class="row bg-dark py-3 px-3">
+     <!-- About column -->
+     <div class="col-lg-4 col-12 my-3">
+       <span class="h5 d-block text-start text-white">
+         About Us
+       </span>
+
+       <span class="d-block line-green my-2"></span>
+       <p class="my-3 text-white pe-3">
+         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nisi, perspiciatis.
+          Sint enim adipisci nobis expedita veniam sed.
+       </p>
+
+       <!-- Email -->
+       <div class="d-flex flex-column">
+         <a href="#" class="text-white d-block text-start my-2">
+           <i class="fas fa-envelope me-3"></i>
+           info@beelancing.com
+         </a>
+         <a href="#" class="text-white d-block text-start my-2">
+           <i class="fas fa-phone me-3"></i>
+           +254712345678
+         </a>
+       </div>
+
+
+     </div>
+     <!-- Quick links column -->
+     <div class="col-lg-4 col-md-6 col-12 my-3">
+       <span class="h5 d-block text-start text-white">
+         Quick Links
+       </span>
+       <span class="d-block line-green my-2"></span>
+       <!-- links -->
+       <div class="d-flex flex-column">
+         <a href="#" class="py-2 text-white d-block text-start links"><i class="fas fa-angle-right me-1"></i> Home</a>
+         <a href="#" class="py-2 text-white d-block text-start links"><i class="fas fa-angle-right me-1"></i> Find Talent</a>
+         <a href="#" class="py-2 text-white d-block text-start links"><i class="fas fa-angle-right me-1"></i> Find Work</a>
+         <a href="#" class="py-2 text-white d-block text-start links"><i class="fas fa-angle-right me-1"></i> Job Posts</a>
+         <a href="#" class="py-2 text-white d-block text-start links"><i class="fas fa-angle-right me-1"></i> Post Job</a>
+
+       </div>
+     </div>
+
+     <!-- Support links column -->
+     <div class="col-lg-4 col-md-6 col-12 my-3">
+       <span class="h5 d-block text-start text-white">
+         Support
+       </span>
+       <span class="d-block line-green my-2"></span>
+       <!-- links -->
+       <div class="d-flex flex-column">
+         <a href="#" class="py-2 text-white d-block text-start links"><i class="fas fa-angle-right me-1"></i> Help</a>
+         <a href="#" class="py-2 text-white d-block text-start links"><i class="fas fa-angle-right me-1"></i> FAQ</a>
+         <a href="#" class="py-2 text-white d-block text-start links"><i class="fas fa-angle-right me-1"></i> File Dispute</a>
+         <a href="#" class="py-2 text-white d-block text-start links"><i class="fas fa-angle-right me-1"></i> For Talent</a>
+         <a href="#" class="py-2 text-white d-block text-start links"><i class="fas fa-angle-right me-1"></i> For Client</a>
+
+       </div>
+     </div>
+
+     <!-- social and copy -->
+     <div class="col-12 mt-4 mb-1 d-flex justify-content-between">
+       <!-- Copy -->
+       <span class="d-block text-start text-white h6">
+         Beelancing &copy 2022
+       </span>
+        <!-- socials -->
+        <div class="d-flex flex-row align-items-center my-2">
+         <a href="#" class="text-white">
+           <i class="fab fa-facebook me-3"></i>
+         </a>
+         <a href="#" class="text-white me-3">
+           <i class="fab fa-instagram"></i>
+         </a>
+         <a href="#" class="text-white me-3">
+           <i class="fab fa-twitter"></i>
+         </a>
+         <a href="#" class="text-white me-3">
+           <i class="fab fa-linkedin"></i>
+         </a>
+       </div>
+     </div>
+    </div>
+</footer>
+
+    
+
+    <!-- JQUERY JS LINK -->
+    <script src="{% static 'assets/js/jquery.js' %}"></script>
+
+    <!-- BOOTSTRAP JS LINK -->
+    <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/js/mdb.min.js' %}"></script>
+
+    <!-- FONTAWESOME JS LINK -->
+    <script src="{% static 'assets/js/all.js' %}"></script>
+
+    <!-- isotope filter js link -->
+    <script src="{% static 'assets/js/isotope.js' %}"></script>
+
+    <!-- main js link -->
+    <script src="{% static 'assets/js/main.js' %}"></script>
+</body>
+
+</html>

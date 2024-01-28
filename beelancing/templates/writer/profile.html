@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+{%load static%}
+{%load humanize%}
+{%load customtags%}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beelancing | My Profile</title>
+  
+    <!-- bootstrap css link -->
+    <link rel="stylesheet" href="{% static 'assets/css/mdb.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+  
+    <!-- fontawesome css link -->
+    <link rel="stylesheet" href="{% static 'assets/css/all.css' %}">
+  
+    <!-- style css link -->
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/profiles.css' %}">
+  </head>
+<body>
+    <!--Main Navigation-->
+    <header class="main-head pb-2">
+      <!-- Navbar -->
+      {%include 'writer/navbar.html'%}
+    <!-- Navbar -->
+    </header>
+  <!--Main Navigation-->
+  
+    <main class="main px-3">
+        <!-- Main content goes here -->
+    <div class="container-fluid pt-4" style="margin-top: 45px;">
+      <div class="container emp-profile card">
+        <form method="post" action="{%url 'editpic'%}">
+          {%csrf_token%}
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="profile-img">
+                        <img src="{{request.user.username|profilepic}}" alt=""/>
+                        <div class="file btn btn-lg btn-primary">
+                            Change Photo
+                            <input type="file" name="file" name="pic" accept=".jpg, .jpeg, .png" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="profile-head">
+                                <h5>
+                                    {{biodata.FirstName}} {{biodata.LastName}}
+                                </h5>
+                                <h6>
+                                    {{writer.Profesion}}
+                                </h6>
+                                <p class="proile-rating">RATINGS : <span>3/5</span></p>
+<ul class="nav nav-tabs mb-4" id="myTabContent" role="tablist">
+    <li class="nav-item" role="presentation">
+      <a
+        class="nav-link active"
+        id="home1"
+        data-mdb-toggle="tab"
+        href="#home1"
+        role="tab"
+        aria-controls="home1"
+        aria-selected="true"
+        >ABOUT</a
+      >
+    </li>
+    <li class="nav-item" role="presentation">
+      <a
+        class="nav-link"
+        id="profile1"
+        data-mdb-toggle="tab"
+        href="#profile1"
+        role="tab"
+        aria-controls="profile1"
+        aria-selected="false"
+        >TIMELINE</a
+      >
+    </li>
+    
+  </ul>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                  <a href="{%url 'settings'%}" class="text-decoration-none border border-gray py-2 px-3 profile-edit-btn">Edit Profile</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="profile-work">
+                        <p>Description</p>
+                        <div class="py-1">
+                         <small>
+                          <span class="d-block h6 text-start">
+                            {{Biodata.Description}}
+                          </span>
+                         </small>
+                        </div>
+                        <p>SKILLS</p>
+                        <div class="my-1 py-2">
+                          {%for x in writer.Skills|skills%}
+                          <span class="badge badge-success text-primary p-3 me-2 mb-3">{{x}}</span>
+                          {%endfor%}
+                        </div>
+                        <span class="d-block m-2 pb-3">
+                          <i class="fas fa-location me-1"></i>
+                          Kenya <small class="text-dark ms-3">GMT+3</small>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="tab-content profile-tab" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home1" role="tabpanel" aria-labelledby="home-tab">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Name</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>{{biodata.FirstName}} {{biodata.LastName}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Email</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>{{request.user.username}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Account Type</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>Talent</p>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label>Profession</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>{{writer.Profesion}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                          <label>CV</label>
+                                      </div>
+                                      <div class="col-md-6">
+                                        <a href="{{writer.CV.url}}" download="" class="text-decoration-none border border-gray py-2 px-3 profile-edit-btn rounded-0"><i class="fas fa-download me-"></i> Download CV</a>
+                                      </div>
+                                    </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>           
+    </div>
+    </div>
+    <!-- Main content ends here -->
+    </main>
+
+
+    
+
+     <!-- jquery js link -->
+  <script src="{% static 'assets/js/jquery.js' %}"></script>
+
+  <!-- bootstrap js link -->
+  <script src="{% static 'assets/js/mdb.min.js' %}"></script>
+  <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+
+  <!-- fontawesome js link -->
+  <script src="{% static 'assets/js/all.js' %}"></script>
+</body>
+
+</html>

@@ -1,0 +1,209 @@
+ /* import font.css */
+
+ @import url(./font.css);
+
+* {
+    box-sizing: border-box;
+    font-family: "poppins", sans-serif;
+  }
+  
+  body {
+    background-color: #ffffff;
+  }
+
+  ::-webkit-scrollbar {
+    background-color: #fffafa;
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-image:  linear-gradient(to right, #b3b1cb, #75757c);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-image: linear-gradient(to right, #24243e, #302b63, #0f0c29);
+    border-radius: 12px;
+  }
+  
+  #regForm {
+    background-color: #ffffff;
+    margin: 5px auto;
+    font-family: Raleway;
+    padding: 0 9px;
+    width: 70%;
+    min-width: 300px;
+  }
+  
+  h1 {
+    font-size: 21px;
+    color: #141414;
+    text-align: center;  
+  }
+  
+  input {
+    padding: 12px;
+    width: 100%;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: .3rem;
+    border: 1px solid #aaaaaa;
+    outline: none;
+    border-radius: 6px;
+    height: 45px;
+  }
+
+  input::placeholder {
+    font-size: 15px;
+    font-weight: 500;
+  }
+
+  input:focus {
+    border: 1.3px solid #04AA6D;
+  }
+  
+  /* Mark input boxes that gets an error on validation: */
+  input.invalid {
+    outline: 1px solid #DC4C64;
+    border: none;
+  }
+  
+  /* Hide all steps by default: */
+  .tab {
+    display: none;
+  }
+
+  .form-border {
+    border-radius: 6px 18px;
+    padding: 21px;
+    border: 1px solid #ccc;
+    box-shadow: 3px 4px 2px #aaaaaa;
+  }
+  
+  button {
+    margin-top: 6px;
+    border: 1px solid#04AA6D;
+    background-color: #04AA6D;
+    border-radius: 6px;
+    color: #ffffff;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    width: auto;
+  }
+  
+  button:hover {
+    border: none;
+    color: #ffffff;
+    background-color: #04AA6D;
+    transition: all .2s ease-in-out;
+  }
+  
+  #prevBtn {
+    background-color: #0468aa;
+    border: 1px solid#0468aa;
+  }
+
+  #prevBtn:hover {
+    border: none;
+    color: #ffffff;
+    background-color: #0468aa;
+    transition: all .2s ease-in-out;
+  }
+  
+  /* Make circles that indicate the steps of the form: */
+  .step {
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbbbbb;
+    border: none;  
+    border-radius: 50%;
+    display: inline-block;
+    opacity: 0.5;
+  }
+  
+  .step.active {
+    opacity: 1;
+  }
+  
+  /* Mark the steps that are finished and valid: */
+  .step.finish {
+    background-color: #04AA6D;
+  }
+
+  label {
+    display: block;
+    padding: .3rem 0;
+    margin-bottom: .5rem;
+    font-size: 16px;
+    font-weight: 600;
+    color: #111;
+    letter-spacing: .2px;
+  }
+
+  select {
+    border-radius: 6px;
+    padding: 9px 5px;
+    width: 100%;
+    font-size: 15px;
+    margin-bottom: .3rem;
+    border: 1px solid #aaaaaa;
+  }
+
+  select:focus {
+    outline: 1.2px solid #04AA6D;
+    border: none;
+    transition: border ease;
+  }
+
+
+  select option {
+    font-size: 15px;
+    font-weight: 500;
+  }
+
+  select option:hover {
+    background-color: #04AA6D;
+  }
+
+  select option:focus {
+    border: 1.2px solid #04AA6D;
+  }
+
+  select option[value=""][disabled] {
+    font-size: 15px;
+    font-weight: 500;
+  }
+
+  textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+  }
+
+  textarea:focus {
+    outline: 1.2px solid #04AA6D;
+    border: none;
+  }
+
+  textarea::placeholder {
+    font-size: 15px;
+  }
+
+  .input {
+    font-size: 3px;
+    display: inline;
+    width: auto;
+  }
+
+  .label {
+    display: inline;
+  }
+
+  .tab-div {
+    margin-bottom: 10px;
+  }
+
+  .card-body {
+    margin-top: 15px;
+  }

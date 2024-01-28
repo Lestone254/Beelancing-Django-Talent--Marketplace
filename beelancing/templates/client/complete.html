@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+{%load static%}
+{%load customtags%}
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Complete Job Payment</title>
+    <meta name="description" content="Complete Job Payment" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- bootstrap css link -->
+  <link rel="stylesheet" href="{% static 'assets/css/mdb.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+  <script src="https://www.paypal.com/sdk/js?client-id=AR2xvfe2BLCxR3RnvLsGTpTQGTS5nHXztRR25O_JMQ3ZrIxpxLlmkZmsgmK8eecGnCZ_Fltqptkw1Msa"></script>
+  <!-- fontawesome css link -->
+  <link rel="stylesheet" href="{% static 'assets/css/all.css' %}">
+
+  <!-- style css link -->
+  <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+  </head>
+  <body>
+    <!-- Display a payment form -->
+<div class="row justify-content-center">
+  <div class="col-12 col-md-8">
+    <div class="container w-100 d-flex align-content-center justify-content-start align-items-center mb-4">
+      <div class="d-flex flex-column posto p-2 px-3 w-100 my-2">
+        <!-- Job heading -->
+        <span class="h4 d-block text-start my-4">
+          {{job.Title}}
+        </span>
+
+        <!-- Category -->
+        <a href="#" class="text-decoration-none d-block text-start">
+          {{job.category}}
+        </a>
+        <span class="text-muted d-block text-start">
+
+        </span>
+        <hr>
+
+        <!-- description -->
+        <p class="py-3">
+          {{job.Description}}
+        </p>
+        <hr>
+
+        <div class="d-flex flex-row">
+
+          <!-- clock -->
+          <span class="d-flex flex-row text-start me-3">
+              <span class="d-block">
+                  <i class="fas fa-clock me-2"></i>
+              </span>
+             <span class="d-flex flex-column">
+              <span class="fw-bold d-block">
+                  {{job.Rate}}
+              </span>
+              <span class="text-muted d-block">
+                  Rate
+              </span>
+             </span>
+          </span>
+
+          <!-- Project length -->
+          <span class="d-flex flex-row text-start me-3">
+              <span class="d-block">
+                  <i class="fa-solid fa-calendar-days me-3"></i>
+              </span>
+             <span class="d-flex flex-column">
+              <span class="fw-bold d-block">
+                  {{job.Duration}}
+              </span>
+              <span class="text-muted d-block">
+                  Project Length
+              </span>
+             </span>
+          </span>
+
+          <!-- Experience level -->
+          <span class="d-flex flex-row text-start me-3">
+              <span class="d-block">
+                  <i class="fa-solid fa-head-side-virus me-3"></i>
+              </span>
+             <span class="d-flex flex-column">
+              <span class="fw-bold d-block">
+                  {{job.Level}}
+              </span>
+              <span class="text-muted d-block">
+                  Experience level
+              </span>
+             </span>
+          </span>
+
+          <!-- Hourly Rate -->
+          <span class="d-flex justify-content-around text-start me-3">
+              <span class="d-block">
+                  <i class="fa-solid fa-stopwatch me-3"></i>
+              </span>
+             <span class="d-flex flex-column">
+              <span class="fw-bold d-block">
+                  Amount
+              </span>
+              <span class="text-muted d-block">
+                   $ {{job.Amount}}
+              </span>
+             </span>
+          </span>
+
+
+        </div>
+        <hr>
+
+        <span class="d-block text-start">
+          <span class="fw-bold">Project Type:</span> {{job.Type}}
+        </span>
+        <hr>
+
+        <div class="d-flex flex-column py-">
+          <span class="d-block h6 fw-bold text-start">
+              Skills and Expertise
+          </span>
+
+          <p class="py-2">
+            {%for x in job.Skills|skills%}
+              <span class="badge badge-danger text-muted p-3 fw-bold">{{x}}</span>
+            {%endfor%}
+          </p>
+        </div>
+        {{form.render}}
+
+      </div>
+    </div>
+  </div>
+</div>
+  </body>
+</html>

@@ -1,0 +1,47 @@
+            <nav class="navBar d-flex justify-content-between align-items-center p-3" id="navabr">
+                <div class="humb-logo-container d-flex flex-row align-items-center">
+                    <!-- hamburger menu -->
+                    <div id="humburgerMenu">
+                        <span class="humburgerMenu fas fa-bars me-2 d-block d-lg-none"></span>
+                    </div>
+                    <!-- logo -->
+                    <a href="/" class="d-block fw-bold logo"><span class="text-success">Bee</span>lancing</a>
+                </div>
+
+                <!-- navlinks -->
+                <div class="d-none d-lg-flex justify-content-between align-items-center navContainer" id="navContainer">
+                    <a href="#" class="nav-links">How It Works</a>
+                    <a href="#" class="nav-links">Browse Jobs</a>
+                    <a href="#" class="nav-links">View Freelancers</a>
+                </div>
+
+                <!-- sign in and join now -->
+                <div class="d-flex flex-row align-items-center sign-join">
+                    <a href="{%url 'signin'%}" class="mx-2 sign-in">
+                        <i class="far fa-user-circle  me-1"></i>
+                        Sign In
+                    </a>
+
+                    <a href="{%url 'signup'%}" class="btn btn-success mx-2">
+                        Join Now
+                    </a>
+                </div>
+
+                <!-- sidebar -->
+                <div class="side-bar shadow d-block d-lg-none" id="side-bar">
+                    <span class="d-flex justify-content-between text-end pb-0 mt-4 px-4">
+                        <!-- logo -->
+                        <a href="/" class="d-block text-start text-dark bg-white fw-bold logo"><span class="text-success">Bee</span>lancing</a>
+
+                        <button type="button" id="closeBtn">
+                            <i class="fas fa-close"></i>
+                        </button>
+                    </span>
+                    <hr>
+                    <div class="d-flex flex-column pt-5">
+                        <a href="#" class="nav-links my-5 px-5">How It Works</a>
+                        <a href="#" class="nav-links my-5 px-5">Browse Jobs</a>
+                        <a href="#" class="nav-links my-5 px-5">View Freelancers</a>
+                    </div>
+                </div>
+            </nav>

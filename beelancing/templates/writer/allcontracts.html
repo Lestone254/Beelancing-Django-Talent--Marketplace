@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+{%load static%}
+{%load humanize%}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Writers palace | All Contracts</title>
+
+  <!-- bootstrap css link -->
+  <link rel="stylesheet" href="{% static 'assets/css/mdb.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+
+  <!-- fontawesome css link -->
+  <link rel="stylesheet" href="{% static 'assets/css/all.css' %}">
+
+  <!-- style css link -->
+  <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+</head>
+<body>
+  <!-- header -->
+ <header class="main-head pb-2">
+  <!-- Navbar -->
+  {%include 'writer/navbar.html'%}
+<!-- Navbar -->
+</header>
+
+<main class="main">
+    <!-- header container -->
+<div class="container-fluid px-2 mt-5 pt-4">
+   <div class="container d-flex justify-content-center align-content-center align-items-center">
+    <span class="d-block text-start h5 py-3 fw-bold" style="width: 800px;">All Contracts</span>
+   </div>
+
+  <!-- All contracts -->
+  <div class="container d-flex align-content-center justify-content-center align-items-center mb-4">
+   
+    <div class="d-flex flex-column posto p-2 px-3" style="width: 822px;">
+      <!-- Search -->
+      <form action="#" method="post" class="mt-3">
+        <div class="input-group me-3">
+          <div class="form-outline">
+              <input type="search" id="form1" class="form-control" />
+              <label class="form-label" for="form1">Search y contract or freelancer</label>
+          </div>
+          <button type="button" class="btn btn-success">
+          <i class="fas fa-search"></i>
+          </button>
+      </div>
+      </form>
+
+      <!-- sort by -->
+      <div class="d-flex justify-content-between align-items-center my-5">
+        <div class="d-flex justify-content-between align-items-center">
+            <span class="h6 d-flex align-items-start text-center me-1 fw-bold">Sort By:</span>
+            <form action="#">
+                <div class="row">
+                    <div class="col-6">
+                        <select class="form-select" aria-label="Default select example">
+                            <option selected>Start date</option>
+                            <option value="1">End date</option>
+                            <option value="2">Client name</option>
+                            <option value="3">Contract name</option>
+                          </select>
+                    </div>
+                    <div class="col-6">
+                        <select class="form-select" aria-label="Default select example">
+                            <option selected>Ascending</option>
+                            <option value="1">Descending</option>
+                          </select>
+                    </div>
+                </div>
+            </form>
+            <!-- Number of jobs -->
+            <span class="h6 text-start px-2 text-secondary fw-bold">3 total</span>
+        </div>
+
+        <!-- Download csv link -->
+        <a href="#" class="text-decoration-none text-start"><i class="fas fa-download"></i> Download CSV</a>
+    </div>
+      
+      <!-- job item -->
+      {%for x in contracts%}
+      <div class="container-fluid my-2">
+        <!-- header -->
+        <div class="d-flex justify-content-between mb-4">
+         <a href="#" class="text-decoration-none"><span class="h5 d-block text-dark text-start">Job title goes here</span></a>
+        <div class="dropdown">
+          <button class="btn btn-sm shadow-none d-flex align-content-center p-2 batona" type="button" id="dropdownMenu2" data-mdb-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-ellipsis"></i>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+            <li><button class="dropdown-item" type="button"><i class="fas fa-eye me-2"></i>View Post</button></li>
+            <li><button class="dropdown-item" type="button"><i class="fas fa-pen me-2"></i>Message</button></li>
+            <li><button class="dropdown-item" type="button"><i class="fas fa-dollar-sign me-2"></i>Request Payment</button></li>
+            <li><button class="dropdown-item" type="button"><i class="fas fa-ban me-2"></i>Withdraw</button></li>
+          </ul>
+        </div>
+        </div>
+
+        <!-- row container -->
+        <a href="#" class="row text-decoration-none">
+          <!-- Budget -->
+          <p class="text-muted d-flex flex-row">
+            <span class="me-1">Est.Budget:$50 -</span>
+            <span class="me-1">Entry -</span>
+            <span>Posted 3hrs ago</span>
+          </p>
+
+          <!-- description -->
+          <p class="text-secondary">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta doloribus sed est facere sunt nam! Optio, doloremque.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, quo eveniet asperiores error ratione obcaecati quas deserunt?
+
+          </p>
+
+          <!-- status -->
+          <p class="text-dark fw-bold">
+            Status: Open
+          </p>
+        </a>
+        <hr>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- header container -->
+</main>
+
+  <!-- jquery js link -->
+  <script src="{% static 'assets/js/jquery.js' %}"></script>
+
+  <!-- bootstrap js link -->
+  <script src="{% static 'assets/js/mdb.min.js' %}"></script>
+  <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+
+  <!-- fontawesome js link -->
+  <script src="{% static 'assets/js/all.js' %}"></script>
+
+  <!-- main js link -->
+  <script src="{% static 'assets/js/main.js' %}"></script>
+</body>
+</html>

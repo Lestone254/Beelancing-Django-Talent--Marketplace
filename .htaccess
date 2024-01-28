@@ -1,0 +1,5 @@
+# DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION BEGIN
+PassengerAppRoot "/home/beelanci/public_html/beelancing"
+PassengerBaseURI "/"
+PassengerPython "/home/beelanci/virtualenv/public_html/beelancing/3.7/bin/python"
+# DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION END

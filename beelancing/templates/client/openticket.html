@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+{%load static%}
+{%load customtags%}
+{%load humanize%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beelancing | File Dispute</title>
+
+    <!-- Bootstrap link -->
+      <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/mdb.min.css' %}">
+
+    <!-- FONT AWESOME CSS LINK -->
+    <link rel="stylesheet" href="{% static 'assets/css/all.css' %}">
+
+    <!-- STYLE CSS LINK -->
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+</head>
+<body>
+   <div class="w-100 position-relative">
+        <!-- navbar begins here -->
+        <header class="header ms-0 position-relative" id="header">
+          {%include 'client/navbar.html'%}
+        </header>
+        <!-- navbar ends here -->
+    </div>
+    <!-- Main content goes here -->
+   <main class="main px-3">
+    <div class="container pt-1">
+        <span class="d-block text-center h2 mt-5 mb-3 py-3">File Dispute</span> 
+
+        <div class="row">
+            <div class="col-12 mb-5">
+                <!-- form -->
+                <form action="#" method="post" enctype="multipart/form-data">
+                    {%csrf_token%}
+                    <div class="row">
+                        <div class="col-12 mb-4">
+                            <label for="subject" class="mb-2">Subject</label>
+                          <input type="text" id="subject" name="subject" class="form-control" placeholder="Enter Subject">
+                        </div>
+                        <div class="form-group col-lg-6 col-12 mb-4">
+                            <label for="Department" class="mb-2">Department</label>
+                            <select id="Department" name="department" class="form-control">
+                                <option value="technical">Technical Support</option>
+                                <option value="dispute" selected>File Dispute</option>
+                                <option value="general">General Inquiries</option>
+                                <option value="abuse">Abuse</option>
+                                <option value="billing">Billing</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-lg-6 col-12 mb-4">
+                            <label for="priority" class="mb-2">Priority</label>
+                            <select id="priority" class="form-control" name="priority">
+                                <option value="high">High</option>
+                                <option value="medium" selected>Medium</option>
+                                <option value="low">Low</option>
+                            </select>
+                        </div>
+                        <div class="col-12 mb-4">
+                            <label for="message" class="mb-2">Message</label>
+                            <textarea class="form-control" id="message" name="message" rows="9" placeholder="Enter Message"></textarea>
+                        </div>
+                        <div class="form-group col-12 mb-4">
+                            <label for="exampleFormControlFile1" class="d-block mb-2">Attachments</label>
+                            <input type="file" name="file" class="form-control-file" id="exampleFormControlFile1" multiple>
+                            <small class="d-block py-2">Allowed File Extensions: .jpg, .gif, .gif, .jpeg</small>
+                          </div>
+                      </div>
+                      <div class="col-12 mb-4 text-center">
+                        <button type="submit" class="btn btn-success me-2">Submit</button>
+                        <a href="./ticket.html" class="btn btn-outline-dark">Cancel</a>
+                      </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+   </main>
+    <!-- Main content ends here -->
+
+    
+
+  <!-- JQUERY JS LINK -->
+    <script src="{% static 'assets/js/jquery.js' %}"></script>
+
+    <!-- BOOTSTRAP JS LINK -->
+    <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/js/mdb.min.js' %}"></script>
+
+    <!-- FONTAWESOME JS LINK -->
+    <script src="{% static 'assets/js/all.js' %}"></script>
+
+    <!-- isotope filter js link -->
+    <script src="{% static 'assets/js/isotope.js' %}"></script>
+s
+    <!-- main js link -->
+    <script src="{% static 'assets/js/main.js' %}"></script>
+</body>
+
+</html>

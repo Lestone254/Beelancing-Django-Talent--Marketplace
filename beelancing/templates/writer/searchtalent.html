@@ -1,0 +1,17 @@
+{%load customtags%}
+<div class="card mt-1 p-2 rounded-2  border-0">
+	{%for x in jobs%}
+	<a href="{%url 'job' x.id %}" class="text-dark">
+		<div class="row m-2">
+			<div class="col-12">
+				<div class="row">{{x.Title}}  {{x.Amount}}</div>
+				<div class="row text-primary">
+					{% for y in x.Skills|skills%}
+					{{y}},
+					{%endfor%}
+				</div>
+			</div>
+		</div>
+	</a>
+	{%endfor%}	
+</div>

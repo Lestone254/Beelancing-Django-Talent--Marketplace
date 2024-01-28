@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+{%load static%}
+{%load customtags%}
+{%load humanize%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beelancing | File Dispute</title>
+
+    <!-- Bootstrap link -->
+      <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/mdb.min.css' %}">
+
+    <!-- FONT AWESOME CSS LINK -->
+    <link rel="stylesheet" href="{% static 'assets/css/all.css' %}">
+
+    <!-- STYLE CSS LINK -->
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/pagination.css' %}">
+</head>
+<body>
+   <div class="w-100 position-relative">
+        <!-- navbar begins here -->
+        <header class="header ms-0 position-relative" id="header">
+          {%include 'client/navbar.html'%}
+        </header>
+        <!-- navbar ends here -->
+    </div>
+    <!-- Main content goes here -->
+   <main class="main px-3">
+    <div class="container pt-1">
+         <span class="d-block text-center h2 mt-5 mb-3 py-2">Your Dispute Tickets</span>
+        <div class="row shadow-lg p-2">
+      {%for item in page_obj%}
+          <!-- Ticket found -->
+          <a href="#" class="d-block py-2 px-2 mx-0 mb-2 border border-bottom-dark rounded">
+            <p class="p-2">
+                <span class="d-block text-start text-info pb-3">
+                    #{{item.id}} - {{item.Subject}}
+                </span>
+
+                <div class="d-flex align-content-center align-items-center justify-content-between">
+                    <!-- status -->
+                    {%if item.Closed %}
+                    <span class="d-block badge badge-success p-3">
+                        Closed
+                    </span>
+                    {%else%}
+                    <span class="d-block badge badge-warning p-3">
+                        open
+                    </span>
+                    {%endif%}
+
+                    <!-- time filed -->
+                    <small class="fw-bold text-muted">{{item.Date_filed|date:"F j, Y, g:i a"}}</small>
+                </div>
+            </p>
+          </a>
+          {%endfor%}
+        </div>
+        {% if is_paginated %}
+            <div class="d-block text-center my-4">
+            {% if page_obj.has_previous %}
+                <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+                <a class="btn btn-outline-info mb-4" href="{{page_obj.previous_page_number}}">Previous</a>
+            {% endif %}
+
+            {% for num in page_obj.paginator.page_range %}
+                {% if page_obj.number == num %}
+                    <a class="btn btn-info mb-4 d-none d-sm-inline" href="?page={{ num }}">{{ num }}</a>
+                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                    <a class="btn btn-outline-info mb-4 d-none d-sm-inline" href="?page={{ num }}">{{ num }}</a>
+                {% endif %}
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+                <a class="btn btn-outline-info mb-4" href="{{ page_obj.next_page_number }}">Next</a>
+                <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+            {% endif %}
+            </div>
+         {% endif %}
+
+
+    </div>
+ </main>
+    <!-- Main content ends here -->
+
+
+
+  <!-- JQUERY JS LINK -->
+    <script src="{% static 'assets/js/jquery.js' %}"></script>
+
+    <!-- BOOTSTRAP JS LINK -->
+    <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/js/mdb.min.js' %}"></script>
+
+    <!-- FONTAWESOME JS LINK -->
+    <script src="{% static 'assets/js/all.js' %}"></script>
+
+    <!-- isotope filter js link -->
+    <script src="{% static 'assets/js/isotope.js' %}"></script>
+
+    <!-- main js link -->
+    <script src="{% static 'assets/js/main.js' %}"></script>
+</body>
+
+</html>

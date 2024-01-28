@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+{%load static%}
+{%load customtags%}
+{%load humanize%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beelancing | Settings</title>
+
+    <!-- Bootstrap link -->
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/mdb.min.css' %}">
+
+    <!-- FONT AWESOME CSS LINK -->
+    <link rel="stylesheet" href="{% static 'assets/css/all.css' %}">
+
+    <!-- STYLE CSS LINK -->
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+</head>
+<body>
+  <div class="w-100 position-relative">
+    <!-- navbar begins here -->
+    <header class="header ms-0 position-relative" id="header">
+      {%include 'writer/navbar.html'%}
+    </header>
+    <!-- navbar ends here -->
+</div>
+
+    <main class="main px-3">
+      <!-- header container -->
+<div class="container-fluid px-2">
+  <div class="row">
+      <!-- profile image, name and email -->
+      <div class="col-lg-5 col-12 pe-2">
+          <div class="card pt-3 shadow rounded mb-3">
+              <div class="card-body">
+                <span class="d-block h4 text-center fw-bold">{{biodata.FirstName}} {{biodata.LastName}}</span>
+                <span class="d-block h6 text-center fw-bold">{{request.user.username}}</span>
+                <!-- profile image container -->
+                <div class="position-relative d-flex justify-content-center text-center mt-4 pona">
+                  <img src="{{request.user.username|profilepic}}" width="120px" height="120px" alt="username profile" class="rounded-circle d-block">
+                </div>
+
+                <!-- Upload New Photo section -->
+                <div class="container-fluid text-center mt-3">
+                  <!-- Button trigger modal -->
+<button type="button" class="btn btn-success btn-md" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
+  <i class="fas fa-camera me-1"></i> Add New Photo
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Change profile picture</h5>
+        <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <!-- form -->
+          <form action="{%url 'editpic'%}" method="post" enctype="multipart/form-data">
+            {%csrf_token%}
+              <label class="form-label" for="customFile"></label>
+              <input type="file" class="form-control" name="pic" id="customFile" accept=".jpg, .jpeg, .png" />
+
+              <div class="text-end my-2 mt-4">
+                  <button type="submit" class="btn btn-success">Save</button>
+              </div>
+          </form>
+      </div>
+    </div>
+  </div>
+</div>
+                </div>
+
+                <!-- info section -->
+                <div class="border border-dark px-1 rounded bg-light py-2 my-3">
+                  <span class="d-block text-center">
+                      Upload a new avatar. Larger image will be resized automatically.
+                      
+                     <span class="py-1 d-block mt-2">
+                      Maximum upload size is <strong>1 MB</strong>
+                     </span>
+                  </span>
+                </div>
+
+                <!-- foot note -->
+                <span class="d-block text-center">
+                  Member Since: <strong>{{request.user.date_joined | naturaltime}}</strong>
+                </span>
+              </div>
+            </div>
+      </div>
+      <!-- Edit Profile -->
+      <div class="col-lg-7 col-12 pe-2">
+          <div class="card pt-3 shadow rounded mb-3">
+              <div class="card-body">
+                <span class="h5 d-block text-start fw-bold mb-4">Edit Profile</span>
+
+                <!-- TAB -->
+                <!-- Tabs navs -->
+<ul class="nav nav-tabs mb-4" id="ex1" role="tablist">
+  <li class="nav-item" role="presentation">
+    <a
+      class="nav-link active"
+      id="ex1-tab-1"
+      data-mdb-toggle="tab"
+      href="#ex1-tabs-1"
+      role="tab"
+      aria-controls="ex1-tabs-1"
+      aria-selected="true"
+      >User info</a
+    >
+  </li>
+  <li class="nav-item" role="presentation">
+    <a
+      class="nav-link"
+      id="ex1-tab-2"
+      data-mdb-toggle="tab"
+      href="#ex1-tabs-2"
+      role="tab"
+      aria-controls="ex1-tabs-2"
+      aria-selected="false"
+      >Bio Information</a
+    >
+  </li>
+  
+</ul>
+<!-- Tabs navs -->
+
+<!-- Tabs content -->
+<div class="tab-content mt-3" id="ex1-content">
+  <div
+    class="tab-pane fade show active"
+    id="ex1-tabs-1"
+    role="tabpanel"
+    aria-labelledby="ex1-tab-1"
+  >
+  <form action="{%url 'change'%}" method="post">
+    {%csrf_token%}
+      <div class="form-group mb-3">
+        <label for="exampleInputEmail1">First Name</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" value="{{biodata.FirstName}}" aria-describedby="emailHelp" placeholder="Enter first name" readonly>
+        
+      </div>
+      <div class="form-group mb-3">
+        <label for="exampleInputEmail1">Last Name</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" value="{{biodata.LastName}}" readonly aria-describedby="emailHelp" placeholder="Enter lst name">
+       
+      </div>
+      <div class="form-group mb-3">
+        <label for="exampleInputEmail1">Email address</label>
+        <input type="email" class="form-control" value="{{biodata.Email}}" id="exampleInputEmail1" readonly aria-describedby="emailHelp" placeholder="Enter email">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      </div>
+      <div class="form-group mb-3">
+        <label for="exampleInputPassword1">Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword1" name="newpassword" placeholder="Password">
+      </div>
+      <div class="form-group mb-3">
+        <label for="exampleInputPassword1">Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+      </div>
+      <button type="submit" class="btn btn-success">Update Info</button>
+    </form>
+  </div>
+
+  <div class="tab-pane fade" id="ex1-tabs-2" role="tabpanel" aria-labelledby="ex1-tab-2">
+      <form action="{%url 'updatebio'%}" method="post">
+        {%csrf_token%}
+        <div class="form-outline mb-3">
+          <textarea name="bio" class="form-control" id="textAreaExample1" rows="4">{{writer.Description}}</textarea>
+          <label class="form-label" for="textAreaExample">Bio</label>
+        </div>
+        <div class="form-outline mb-3">
+          <textarea name="skills" class="form-control" id="textAreaExample1" rows="4">{{writer.Skills}}</textarea>
+          <label class="form-label" for="textAreaExample">Skills (seperate with comma)</label>
+        </div>
+          
+          <button type="submit" class="btn btn-success">Update Info</button>
+        </form>
+  </div>
+</div>
+<!-- Tabs content -->
+              </div>
+            </div>
+      </div>
+  </div>
+
+</div>
+<!-- header container -->
+    </main>
+    
+
+    <!-- JQUERY JS LINK -->
+    <script src="{% static 'assets/js/jquery.js' %}"></script>
+
+    <!-- BOOTSTRAP JS LINK -->
+    <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/js/mdb.min.js' %}"></script>
+
+    <!-- FONTAWESOME JS LINK -->
+    <script src="{% static 'assets/js/all.js' %}"></script>
+
+    <!-- isotope filter js link -->
+    <script src="{% static 'assets/js/isotope.js' %}"></script>
+
+    <!-- main js link -->
+    <script src="{% static 'assets/js/main.js' %}"></script>
+</body>
+
+</html>

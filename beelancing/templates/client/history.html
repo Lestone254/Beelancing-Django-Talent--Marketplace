@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+{%load static%}
+{%load customtags%}
+{%load humanize%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beelancing | Welcome</title>
+
+    <!-- Bootstrap link -->
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/mdb.min.css' %}">
+
+    <!-- FONT AWESOME CSS LINK -->
+    <link rel="stylesheet" href="{% static 'assets/css/all.css' %}">
+
+    <!-- STYLE CSS LINK -->
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+</head>
+<body>
+    <div class="w-100 position-relative">
+        <!-- navbar begins here -->
+        <header class="header ms-0 position-relative" id="header">
+    {%if request.user.username|nav%}
+    {% include 'writer/navbar.html' %}
+    {%else%}
+    {%include 'client/navbar.html'%}
+    {%endif%}        </header>
+        <!-- navbar ends here -->
+    </div>
+<main class="main px-3">
+<!-- header container -->
+  <div class="container-fluid px-2" style="margin-top: 88px;">
+    <span class="h5 d-block text-start fw-bold mb-3">Transaction History</span>
+    <span class="d-block text-start fw-bold">
+        Balance:
+        <span class="text-primary">${{wallet.Balance}}.00</span>
+    </span>
+    <span class="d-block text-start text-muted">
+        Escrow balance (not included in balance):
+        <span class="text-primary fw-bold">${{wallet.Escrow}}.00</span>
+    </span>
+
+    <div class="posto mt-3 px-3 py-3">
+
+        <table class="table align-middle mb-0 bg-white">
+            <thead class="bg-white">
+              <tr>
+                <th class="fw-bold">Date</th>
+                <th class="fw-bold">Type</th>
+                <th class="fw-bold">Description</th>
+                <th class="fw-bold">Freelancer</th>
+                <th class="fw-bold">
+                    Amount
+                </th>
+                <th class="fw-bold">
+                    Ref ID
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {%for x in history%}
+              <tr>
+                <td>
+                  {{x.Time}}
+                </td>
+                <td>
+                  {{x.Type}}
+                </td>
+                <td>
+                  {{x.Description}}
+                </td>
+                <td class="text-uppercase">
+                  {{x.Freelancer.Biodata.FirstName}}  {{x.Freelancer.Biodata.LastName}}
+                </td>
+                <td>
+                  (${{x.Amount}}.00)
+                </td>
+                <td>
+
+                    <!-- Button trigger modal -->
+                    <button type="button" class="bg-white text-primary border border-white" data-mdb-toggle="modal" data-mdb-target="#{{x.Reference}}">
+                        {{x.Reference}}
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="{{x.Reference}}" tabindex="-1" aria-labelledby="{{x.Reference}}" aria-hidden="true">
+                        <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Transaction details</h5>
+                                <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="d-flex flex-row py-2">
+                                    <span class="fw-bold d-block w-25">Reference ID</span>
+                                    <span class="ms-5 text-start w-75">{{x.Reference}}</span>
+                                </div>
+
+                                <div class="d-flex flex-row py-2">
+                                    <span class="fw-bold d-block w-25">Date</span>
+                                    <span class="ms-5 text-start w-75">{{x.Time}}</span>
+                                </div>
+
+                                <div class="d-flex flex-row py-2">
+                                    <span class="fw-bold d-block w-25">Type</span>
+                                    <span class="ms-5 text-start w-75">{{x.Type}}</span>
+                                </div>
+
+                                <div class="d-flex flex-row py-2">
+                                    <span class="fw-bold d-block w-25">Description</span>
+                                    <span class="ms-5 text-start w-75"> {{x.Reference}}</span>
+                                </div>
+
+                                <div class="d-flex flex-row py-2">
+                                    <span class="fw-bold d-block w-25">Client</span>
+                                    <span class="ms-5 text-start w-75">
+                                        {{x.User.FirstName}}
+                                    </span>
+                                </div>
+
+                                <div class="d-flex flex-row py-2">
+                                    <span class="fw-bold d-block w-25">Freelancer</span>
+                                    <span class="ms-5 text-start w-75">
+                                        {{x.Freelancer.Biodata.FirstName}}  {{x.Freelancer.Biodata.LastName}}
+                                    </span>
+                                </div>
+
+                                <div class="d-flex flex-row py-2">
+                                    <span class="fw-bold d-block w-25">Amount</span>
+                                    <span class="ms-5 w-75">
+                                        (${{x.Amount}}.00)
+                                    </span>
+                                </div>
+
+                                <div class="d-flex flex-row py-2">
+                                    <span class="fw-bold d-block w-25">More info</span>
+                                    <span class="ms-5 w-75">
+                                        <a href="#" class="text-decoration-none"><i class="fas fa-file"></i> View invoice</a>
+                                    </span>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+              </tr>
+              {%endfor%}
+
+            </tbody>
+          </table>
+
+
+    </div>
+
+    </div>
+</main>
+     <!-- footer content -->
+ <footer class="w-100 pt-3 pb-0 px-2 mb-0 d-flex flex-column">
+    <!-- footer section begins here -->
+    <div class="row bg-dark py-3 px-3">
+     <!-- About column -->
+     <div class="col-lg-4 col-12 my-3">
+       <span class="h5 d-block text-start text-white">
+         About Us
+       </span>
+
+       <span class="d-block line-green my-2"></span>
+       <p class="my-3 text-white pe-3">
+         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nisi, perspiciatis.
+          Sint enim adipisci nobis expedita veniam sed.
+       </p>
+
+       <!-- Email -->
+       <div class="d-flex flex-column">
+         <a href="#" class="text-white d-block text-start my-2">
+           <i class="fas fa-envelope me-3"></i>
+           info@beelancing.com
+         </a>
+         <a href="#" class="text-white d-block text-start my-2">
+           <i class="fas fa-phone me-3"></i>
+           +254712345678
+         </a>
+       </div>
+
+
+     </div>
+     <!-- Quick links column -->
+     <div class="col-lg-4 col-md-6 col-12 my-3">
+       <span class="h5 d-block text-start text-white">
+         Quick Links
+       </span>
+       <span class="d-block line-green my-2"></span>
+       <!-- links -->
+       <div class="d-flex flex-column">
+         <a href="#" class="py-2 text-white d-block text-start links"><i class="fas fa-angle-right me-1"></i> Home</a>
+         <a href="#" class="py-2 text-white d-block text-start links"><i class="fas fa-angle-right me-1"></i> Find Talent</a>
+         <a href="#" class="py-2 text-white d-block text-start links"><i class="fas fa-angle-right me-1"></i> Find Work</a>
+         <a href="#" class="py-2 text-white d-block text-start links"><i class="fas fa-angle-right me-1"></i> Job Posts</a>
+         <a href="#" class="py-2 text-white d-block text-start links"><i class="fas fa-angle-right me-1"></i> Post Job</a>
+
+       </div>
+     </div>
+
+     <!-- Support links column -->
+     <div class="col-lg-4 col-md-6 col-12 my-3">
+       <span class="h5 d-block text-start text-white">
+         Support
+       </span>
+       <span class="d-block line-green my-2"></span>
+       <!-- links -->
+       <div class="d-flex flex-column">
+         <a href="#" class="py-2 text-white d-block text-start links"><i class="fas fa-angle-right me-1"></i> Help</a>
+         <a href="#" class="py-2 text-white d-block text-start links"><i class="fas fa-angle-right me-1"></i> FAQ</a>
+         <a href="#" class="py-2 text-white d-block text-start links"><i class="fas fa-angle-right me-1"></i> File Dispute</a>
+         <a href="#" class="py-2 text-white d-block text-start links"><i class="fas fa-angle-right me-1"></i> For Talent</a>
+         <a href="#" class="py-2 text-white d-block text-start links"><i class="fas fa-angle-right me-1"></i> For Client</a>
+
+       </div>
+     </div>
+
+     <!-- social and copy -->
+     <div class="col-12 mt-4 mb-1 d-flex justify-content-between">
+       <!-- Copy -->
+       <span class="d-block text-start text-white h6">
+         Beelancing &copy 2022
+       </span>
+        <!-- socials -->
+        <div class="d-flex flex-row align-items-center my-2">
+         <a href="#" class="text-white">
+           <i class="fab fa-facebook me-3"></i>
+         </a>
+         <a href="#" class="text-white me-3">
+           <i class="fab fa-instagram"></i>
+         </a>
+         <a href="#" class="text-white me-3">
+           <i class="fab fa-twitter"></i>
+         </a>
+         <a href="#" class="text-white me-3">
+           <i class="fab fa-linkedin"></i>
+         </a>
+       </div>
+     </div>
+    </div>
+</footer>
+
+
+
+    <!-- JQUERY JS LINK -->
+    <script src="{% static 'assets/js/jquery.js' %}"></script>
+
+    <!-- BOOTSTRAP JS LINK -->
+    <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/js/mdb.min.js' %}"></script>
+
+    <!-- FONTAWESOME JS LINK -->
+    <script src="{% static 'assets/js/all.js' %}"></script>
+
+    <!-- isotope filter js link -->
+    <script src="{% static 'assets/js/isotope.js' %}"></script>
+s
+    <!-- main js link -->
+    <script src="{% static 'assets/js/main.js' %}"></script>
+</body>
+
+</html>

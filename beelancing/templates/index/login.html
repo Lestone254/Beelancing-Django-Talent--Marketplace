@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beelancing | Login</title>
+
+    <!-- Bootstrap link -->
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/mdb.min.css' %}">
+
+    <!-- FONT AWESOME CSS LINK -->
+    <link rel="stylesheet" href="{% static 'assets/css/all.css' %}">
+
+    <!-- STYLE CSS LINK -->
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+</head>
+<body>
+     
+    <div class="container d-flex flex-column justify-content-center align-content-center align-items-center mt-5">
+        <div class="container ps-0 row d-flex justify-content-center align-items-center mt-5">
+            <div class="col-md-6 col-12 shadow mt-5">
+                <form action="" method="post" class="signUp py-4" id="signUp" name="signUp" onsubmit="return validateForm()">
+                                          {%csrf_token%}
+                    <div class="row">
+                        <div class="col-12">
+                            <!-- logo -->
+                            <a href="#" class="d-block text-center fw-bold logo mb-5 pb-3"><span class="text-success">Bee</span>lancing | Login</a>
+                            {%if error%}
+                            <div class="alert alert-danger">
+                              {{error}}
+                            </div>
+                            {%endif%}
+                        </div>
+                        <div class="col-12 mb-3 position-relative">
+                            <label for="semail" class="d-none"></label>
+                            <input type="email" id="semail" name="semail" class="w-100 semail" placeholder="Email Address" required>
+                            <span class="signIcon">
+                                <i class="far fa-envelope"></i>
+                            </span>
+                        </div>
+                        <div class="col-12 mb-3 position-relative">
+                            <label for="spsw" class="d-none"></label>
+                            <input type="password" id="spsw" name="spsw" class="w-100 spsw" placeholder="Enter Password" required>
+                            <span class="signIcon">
+                                <i class="fas fa-lock"></i>
+                            </span>
+                        </div>
+                        <div class="col-12 mb-3">
+                            <button class="btn btn-success btn-lg btn-block" id="signBtn">Login</button>
+                        </div>
+                        <div class="col-12 mb-3">
+                            <span class="d-block text-start">
+                                Don't have an account?
+                                <a href="{%url 'signup'%}">Sign up</a>
+                            </span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    
+
+    <!-- JQUERY JS LINK -->
+    <script src="{% static 'assets/js/jquery.js' %}"></script>
+
+    <!-- BOOTSTRAP JS LINK -->
+    <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/js/mdb.min.js' %}"></script>
+
+    <!-- FONTAWESOME JS LINK -->
+    <script src="{% static 'assets/js/all.js' %}"></script>
+
+    <!-- isotope filter js link -->
+    <script src="{% static 'assets/js/isotope.js' %}"></script>
+
+    <!-- main js link -->
+    <script src="{% static 'assets/js/main.js' %}"></script>
+</body>
+
+</html>

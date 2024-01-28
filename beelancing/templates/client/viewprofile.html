@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+{%load static%}
+{%load customtags%}
+{%load humanize%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beelancing | Talent Profile</title>
+
+    <!-- Bootstrap link -->
+    <link rel="stylesheet" href="{%static 'assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{%static 'assets/css/mdb.min.css' %}">
+
+    <!-- FONT AWESOME CSS LINK -->
+    <link rel="stylesheet" href="{%static 'assets/css/all.css' %}">
+
+    <!-- STYLE CSS LINK -->
+    <link rel="stylesheet" href="{%static 'assets/css/style.css' %}">
+</head>
+<body>
+    <div class="w-100 position-relative">
+        <!-- navbar begins here -->
+        <header class="header ms-0 position-relative" id="header">
+          {%include 'client/navbar.html'%}
+        </header>
+        <!-- navbar ends here -->
+    </div>
+
+   <main class="main px-3">
+    <div class="container">
+        <div class="row">
+          <div class="col-lg-5 col-12 shadow border border-dark rounded mb-4 p-2">
+            <!-- profile image -->
+            <div class="d-flex flex-column justify-content-center align-items-center my-2">
+              <img src="{{biodata.Email|profilepic}}" alt="Full Name" height="75px" width="75px" class="rounded-circle d-block mb-1">
+              <span class="d-block text-center h5">{{biodata.FirstName}} {{biodata.LastName}}</span>
+              <!-- rating -->
+          <div class="text-start">
+        </div>
+              <!-- category -->
+              <span class="d-block text-center">{{writer.Profesion}}</span>
+              
+            </div>
+
+            <!-- description -->
+            <p class="py-1 d-none d-md-block">
+              {{writer.Description}}
+            </p>
+            <div class="accordion acccordion-flush d-block d-md-none" id="accordionExample2">
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingTwo">
+                  <button
+                    class="accordion-button text-dark"
+                    type="button"
+                    data-mdb-toggle="collapse"
+                    data-mdb-target="#collapseTwo"
+                    aria-expanded="true"
+                    aria-controls="collapseTwo"
+                  >
+                    <span class="d-block text-start">
+                      Bio
+                    </span>
+                  </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo" data-mdb-parent="#accordionExample2">
+                  <div class="accordion-body px-2">
+                    <p class="py-1">
+                      {{writer.Description}}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-7 col-12 px-2">
+            <div class="card px-2 mb-3">
+              <span class="d-block fw-bold h6 text-start py-3">Basic Information</span>
+              <div class="row">
+                <div class="col-lg-4 col-6 d-flex flex-column mb-3">
+                  <span class="text-muted pt-2 text-uppercase"><small>Name</small></span>
+                  <span class="d-block text-start fw-bold">
+                    <small>{{biodata.FirstName}} {{biodata.LastName}}</small>
+                  </span>
+                </div>
+                <div class="col-lg-4 col-6 d-flex flex-column mb-3">
+                  <span class="text-muted pt-2 text-uppercase"><small>Job Success Rate</small></span>
+                  <span class="d-block text-start fw-bold">
+                    <small>75% (3/4)</small>
+                  </span>
+                </div>
+                <div class="col-lg-4 col-6 d-flex flex-column mb-3">
+                  <span class="text-muted pt-2 text-uppercase"><small>Earnings ($)</small></span>
+                  <span class="d-block text-start fw-bold">
+                    <small>50k +</small>
+                  </span>
+                </div>
+                <div class="col-lg-4 col-6 d-flex flex-column mb-3">
+                  <span class="text-muted pt-2 text-uppercase"><small>Hourly Rate ($)</small></span>
+                  <span class="d-block text-start fw-bold">
+                    <small>500</small>
+                  </span>
+                </div>
+                <div class="col-lg-4 col-6 d-flex flex-column mb-3">
+                  <span class="text-muted pt-2 text-uppercase"><small>Country</small></span>
+                  <span class="d-block text-start fw-bold">
+                    <small>Kenya</small>
+                  </span>
+                </div>
+                <div class="col-lg-4 col-6 d-flex flex-column mb-3">
+                  <span class="text-muted pt-2 text-uppercase"><small>Experience</small></span>
+                  <span class="d-block text-start fw-bold">
+                    <small>Entry</small>
+                  </span>
+                </div>
+                <div class="col-12 my-3">
+                  <a href="{%url 'startchat' biodata.Email %}" class="btn btn-success rounded"><i class="far fa-envelope me-1"></i> Message</a>
+                </div>
+              </div>
+            </div>
+            <div class="card px-2 mb-3">
+              <span class="d-block fw-bold h6 text-start py-3">Skills</span>
+              <div class="row py-3">
+                <!-- item -->
+                <div class="col-12">
+                  <div class="d-flex flex-row align-items-center">
+                  {%for x in writer.Skills|skills%}
+                  <span class="badge badge-success text-primary p-3 me-2">{{x}}</span>
+                  {%endfor%}
+                  </div>
+                </div>
+                </div>
+              </div>
+            </div>
+              <!-- Rating -->
+              <div class="col-12 my-5 card">
+                <span class="text-center h6 d-block mt-3">Reviews ({{biodata.review_set.all.count}})</span>
+            <div class="d-flex justify-content-center mb-3">
+                <span class="mb-2 d-block" style="background-color:rgb(92, 92, 92); width: 120px; height: 1.3px;"></span>
+            </div>
+            <!-- row container for the reviews and form review -->
+        <div class="row py-2">
+            <!-- col for reviews -->
+            <div class="col-lg-6 col-12">
+                <!-- Review -->
+                {%for x in biodata.review_set.all%}
+                <div class="card bg-dark mb-2">
+                    <!-- image -->
+                    <span class="d-block text-center d-flex justify-content-center align-items-center pt-3 pb-2">
+                        <img src="{{x.Client.Pic.url}}" alt="User Name" width="60px" height="60px" class="rounded-circle">
+                    </span>
+
+                    <!-- username -->
+                    <span class="d-block text-center" style="color:rgb(168, 168, 168)">
+                        {{x.Client.Biodata.FirstName}} {{x.Client.Biodata.LastName}}
+                    </span>
+
+                    <!-- rating -->
+
+                    <div class="text-center">
+                      {%for star in x.Rate|rate%}
+                        <!-- starts -->
+                        <span style="color: gold; font-size: 13px;">
+                            <i class="fas fa-star"></i>
+                        </span>
+                      {%endfor%}
+                    </div>
+
+                    <!-- review text -->
+                    <p class="card-text text-start text-white p-2">
+                        <!-- ICON -->
+                        <i class="fas fa-quote-left"></i>
+
+                        <!-- text -->
+                        <span style="font-size: 14px;">
+                          {{x.Review}}
+                        </span>
+                    </p>
+                </div>
+                {%endfor%}
+            </div>
+
+            <!-- Post Review -->
+            <div class="col-lg-6 col-12">
+                <!-- heading -->
+                <span class="text-center d-block p-0 m-0 pb-2" style="font-size: 14px; font-weight: 400;">
+                    Rate writer
+                </span>
+
+                <!-- form begins here -->
+                <form action="{%url 'rate'%}" method="post">
+                  {%csrf_token%}
+
+                  <input type="hidden" name="writer" value="{{writer.Biodata.Email}}" >
+                    <!-- Name input -->
+                    <div class="form-outline mb-4">
+                        <input type="number" class="form-control" id="formExample1" min="1" max="5" name="rate">
+                        <label for="formExample1" class="form-label">Rate 1-5</label>
+                    </div>
+
+                    <!-- Review input -->
+                    <div class="form-outline mb-4">
+                        <textarea name="review" id="form4Example3" rows="4" class="form-control"></textarea>
+                        <label for="form4Example3" class="form-label">Review</label>
+                    </div>
+
+                    <!-- Submit button -->
+                    <button class="btn btn-success btn-block mb-4" type="submit">Submit</button>
+                </form>
+                <!-- form ends here -->
+            </div>
+        </div>
+            </div>
+          </div>
+        </div>
+   </main>
+    
+
+    <!-- JQUERY JS LINK -->
+    <script src="{%static 'assets/js/jquery.js' %}"></script>
+
+    <!-- BOOTSTRAP JS LINK -->
+    <script src="{%static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{%static 'assets/js/mdb.min.js' %}"></script>
+
+    <!-- FONTAWESOME JS LINK -->
+    <script src="{%static 'assets/js/all.js' %}"></script>
+
+    <!-- isotope filter js link -->
+    <script src="{%static 'assets/js/isotope.js' %}"></script>
+
+    <!-- main js link -->
+    <script src="{%static 'assets/js/main.js' %}"></script>
+</body>
+
+</html>

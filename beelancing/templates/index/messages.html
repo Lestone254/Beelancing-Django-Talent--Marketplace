@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+{%load static%}
+{%load humanize%}
+{%load customtags%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beelancing | Messages</title>
+
+    <!-- Bootstrap link -->
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/mdb.min.css' %}">
+
+    <!-- FONT AWESOME CSS LINK -->
+    <link rel="stylesheet" href="{% static 'assets/css/all.css' %}">
+
+    <!-- STYLE CSS LINK -->
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+</head>
+<body>
+    <div class="w-100 position-relative">
+        <!-- navbar begins here -->
+        <header class="header ms-0 position-relative" id="header">
+    {%if request.user.username|nav%}
+    {% include 'writer/navbar.html' %}
+    {%else%}
+    {%include 'client/navbar.html'%}
+    {%endif%}
+        </header>
+        <!-- navbar ends here -->
+    </div>
+
+   <main class="main px-3">
+     <div class="row">
+
+        <!-- Messages item goes here -->
+        <div class="col-12 mb-4 p-2 border-start border-success border-2 shadow">
+            <!-- message link -->
+            {%if chats%}
+            {%for x in chats%}
+            <a href="{%url 'chatc' x.id %}" class="d-flex justify-content-between">
+                <div class="d-flex flex-row">
+                    <!-- img -->
+                    <img src="{{x.To.Email|profilepic}}" alt="user name" height="90px" width="90px" class="rounded-circle d-block me-2">
+                    <div class="d-flex flex-column">
+                        <span class="userName d-block h5 text-start mb-2">{{x.To.FirstName}} {{x.To.LastName}}</span>
+                        <p class="messageCont py-1">
+                            {{x.message_set.all.last.Body}}
+                        </p>
+                    </div>
+                </div>
+                <!-- time stamp -->
+                <span class="d-block text-end text-md-center">
+                    {{x.message_set.all.last.DateTime|naturaltime}}
+                </span>
+            </a>
+            {%endfor%}
+            {%else%}
+                    <!-- no messages -->
+        <div class="col-12 mb-4 rounded px-2 py-5">
+            <span class="d-block text-center my-5">
+                <i class="far fa-folder fa-6x"></i>
+            </span>
+            <span class="h4 d-block text-center">
+                No messages to display :(
+            </span>
+        </div>
+        {%endif%}
+        </div>
+     </div>
+   </main>
+    
+
+    
+
+    <!-- JQUERY JS LINK -->
+    <script src="{% static 'assets/js/jquery.js' %}"></script>
+
+    <!-- BOOTSTRAP JS LINK -->
+    <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/js/mdb.min.js' %}"></script>
+
+    <!-- FONTAWESOME JS LINK -->
+    <script src="{% static 'assets/js/all.js' %}"></script>
+
+    <!-- isotope filter js link -->
+    <script src="{% static 'assets/js/isotope.js' %}"></script>
+
+    <!-- main js link -->
+    <script src="{% static 'assets/js/main.js' %}"></script>
+</body>
+
+</html>

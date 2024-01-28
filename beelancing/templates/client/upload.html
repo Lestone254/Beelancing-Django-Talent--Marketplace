@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+{%load static%}
+{%load humanize%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beelancing | Post Job</title>
+
+    <!-- Bootstrap link -->
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/mdb.min.css' %}">
+
+    <!-- FONT AWESOME CSS LINK -->
+    <link rel="stylesheet" href="{% static 'assets/css/all.css' %}">
+
+    <!-- STYLE CSS LINK -->
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+</head>
+<body>
+  <div class="w-100 position-relative">
+    <!-- navbar begins here -->
+    <header class="header ms-0 position-relative" id="header">
+      {%include 'client/navbar.html'%}
+    </header>
+    <!-- navbar ends here -->
+</div>
+
+
+    <main class="main">
+      <!-- post job container -->
+    <div class="container my-3 p-3">
+      <span class="d-block text-center text-success fw-bold mb-3">
+        Bee<span class="text-dark">lancing |</span>
+        <span class="text-dark">Post Job</span>
+      </span>
+
+      <div class="row d-flex justify-content-center align-items-center">
+        <div class="col-lg-8 col-9">
+          <form action="{%url 'postjob'%}" method="post" name="postjobForm" class="postjobForm" id="postjobForm">
+            {%csrf_token%}
+            <!-- last step -->
+            <div class="row firstStep p-3 rounded shadow" id="lastStep">
+              <div class="col-12 mb-3">
+                <label for="jobTitle2" class="d-block mb-2">Job Title</label>
+                <input type="text" class="jobTitleinput w-100" id="jobTitle2" name="title" placeholder="Enter job title" required>
+              </div>
+              <div class="col-12 mb-3">
+                <label for="jobCategory2" class="d-block mb-2">Job Category</label>
+                <select class="jobCategorySelect w-100" name="category" id="jobCategory2" aria-label="Default select example" required>
+                  <option value="" selected hidden disabled>Choose category</option>
+                  <option value="Development & IT">Development & IT</option>
+                  <option value="Design & Creative">Design & Creative</option>
+                  <option value="Sales & Marketing">Sales & Marketing</option>
+                  <option value="Writing & Translation">Writing & Translation</option>
+                  <option value="Admin & Customer Support">Admin & Customer Support</option>
+                  <option value="Finance & Account">Finance & Account</option>
+                  <option value="Engineering & Architecture">Engineering & Architecture</option>
+                  <option value="Legal">Legal</option>
+                </select>
+              </div>
+              <div class="col-12 mb-3">
+                <label for="jobDescription2" class="d-block mb-2">Job Description</label>
+                <textarea name="desc" id="jobDescription2" class="w-100" cols="82" rows="7" required></textarea>
+              </div>
+              <div class="col-12 mb-3">
+                <label for="projectType" class="d-block mb-2">Project Type</label>
+                <select class="jobCategoPay w-100" name="projecttype" id="projectType" aria-label="Default select example" required>
+                  <option selected disabled hidden>Choose project Type</option>
+                  <option value="Large">Large i.e large & complex projects</option>
+                  <option value="Medium">Medium i.e medium & not overly complex</option>
+                  <option value="Small">Small i.e simple & starightforward</option>
+                </select>
+              </div>
+              <div class="col-12 mb-3">
+                <label for="jobSkills2" class="d-block mb-2">Skills desired (seperate with comma)</label>
+                <textarea name="skills" id="jobSkills2" class="w-100" cols="82" rows="7" required></textarea>
+              </div>
+              <div class="col-12 mb-3">
+                <label for="projectLength" class="d-block mb-2">Project Length</label>
+                <select class="jobCategoPay w-100" name="" id="duration" aria-label="Default select example" required>
+                  <option value="" selected disabled hidden>Project Length</option>
+                  <option value="1 Month">1 months</option>
+                  <option value="1 - 3 Months">1 - 3 months</option>
+                  <option value="3 - 6 Months">3 - 6 months</option>
+                  <option value="6 + Months">6 + months</option>
+                </select>
+              </div>
+              <div class="col-12 mb-3">
+                <label for="projectLength" class="d-block mb-2">Expertise Level</label>
+                <select class="jobCategoPay w-100" name="level" id="projectType" aria-label="Default select example" required>
+                  <option value="" selected disabled hidden>Choose Expertise Level</option>
+                  <option value="Begginer">Entry Level</option>
+                  <option value="Intermediate">Intermediate Level</option>
+                  <option value="Experienced">Expert Level</option>
+                </select>
+              </div>
+              <div class="col-12 mb-3">
+                <label for="jobPay2" class="d-block mb-2">Pay</label>
+                <select class="jobCategoPay w-100" name="rate" id="jobPay2" aria-label="Default select example" required>
+                  <option value="" selected>Choose pay type</option>
+                  <option value="Fixed">Fixed</option>
+                  <option value="Hourly">Hourly</option>
+                </select>
+              </div>
+              <div class="col-12 mb-3">
+                <label for="jobAmount" class="d-block mb-2">Amount ($)</label>
+                <input type="number" name="amount" class="jobTitleinput w-100" id="jobAmount2" value="5" min="5" required>
+              </div>
+              <div class="col-12 mb-3 text-end">
+                <button type="submit" class="btn btn-success">Submit</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- post job container ends here -->
+    </main>
+
+
+    <!-- JQUERY JS LINK -->
+    <script src="{% static 'assets/js/jquery.js' %}"></script>
+
+    <!-- BOOTSTRAP JS LINK -->
+    <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/js/mdb.min.js' %}"></script>
+
+    <!-- FONTAWESOME JS LINK -->
+    <script src="{% static 'assets/js/all.js' %}"></script>
+
+    <!-- isotope filter js link -->
+    <script src="{% static 'assets/js/isotope.js' %}"></script>
+
+    <!-- main js link -->
+    <script src="{% static 'assets/js/main.js' %}"></script>
+    <!-- <script src="{% static 'assets/js/upload.js' %}"></script> -->
+</body>
+
+</html>
